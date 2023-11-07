@@ -35,18 +35,26 @@
                     <a href="#">
                         <div class="collection-points">
                             <span><img src="/img/icons/map-marker-check-outline.svg" alt=""></span>
-                            <a href="/farms/<%= med._id %>">
+
+                            <% if(farm===0){ %>
                                 <p>
-                                    <% if(farm===0){ %>
-                                        Medicamento indisponível
-                                        <% } else if(farm===1){ %>
-                                            Disponível em <%= farm %> farmácia próxima
-                                                <% } else{ %>
-                                                    Disponível em <%= farm %> farmácias próximas
-                                                        <% } %>
+                                    Medicamento indisponível
                                 </p>
-                            </a>
-                            <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
+                                <% } else if(farm===1){ %>
+                                    <a href="/farms/<%= med._id %>">
+                                        <p>
+                                            Disponível em <%= farm %> farmácia próxima
+                                        </p>
+                                    </a>
+                                    <% } else{ %>
+                                        <a href="/farms/<%= med._id %>">
+                                            <p>
+                                                Disponível em <%= farm %> farmácias próximas
+                                            </p>
+                                        </a>
+                                        <% } %>
+
+                                            <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
                         </div>
                     </a>
                 </div>

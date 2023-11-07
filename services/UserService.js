@@ -4,16 +4,20 @@ import user from '../models/User.js'
 const users = mongoose.model("User", user)
 
 class User {
-    Cad(name, email, password) {
+    async Cad(name, email, password) {
         const newUser = new users({
             name: name,
             email: email,
-            password: password
+            password: password,
         })
 
-        newUser.save()
+        try {
+            await newUser.save();
+            return newUser;
+        } catch (error) {
 
-        return newUser
+            throw error;
+        }
     }
 
     Login(email, password) {
@@ -22,7 +26,7 @@ class User {
     }
 
     Verify(email) {
-        const data = users.findOne({email: email})
+        const data = users.findOne({ email: email })
         return data
     }
 
@@ -51,6 +55,11 @@ class User {
     FindById(id) {
         const data = users.findById(id)
         return data
+    }
+
+    UpdateImage(id, image) {
+        const res = users.findByIdAndUpdate(id, {$set: {image: image}})
+        return res
     }
 }
 

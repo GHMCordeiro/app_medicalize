@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const farm = new mongoose.Schema({
+    id:{
+        type:String
+    },
     email:{
         type:String
     },

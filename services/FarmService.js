@@ -4,7 +4,7 @@ import farm from "../models/Farm.js"
 const Farm = mongoose.model("Farm", farm)
 
 class Farms {
-    Cad(email, password, name, address, latitude, longitude, phone){
+    async Cad(email, password, name, address, latitude, longitude, phone) {
         const newFarm = new Farm({
             email: email,
             password: password,
@@ -17,12 +17,17 @@ class Farms {
             phone: phone
         })
 
-        newFarm.save()
-
-        return newFarm
+        try {
+            // Aguarde a conclusão da operação de salvamento
+            await newFarm.save();
+            return newFarm;
+        } catch (error) {
+            // Lide com erros, se houver algum
+            throw error;
+        }
     }
 
-    FindById(id){
+    FindById(id) {
         const farm = Farm.findById(id)
         return farm
     }

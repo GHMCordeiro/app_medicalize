@@ -5,6 +5,7 @@ import UserService from './services/UserService.js';
 import MedService from './services/MedService.js';
 import FarmService from './services/FarmService.js';
 import { LocalStorage } from 'node-localstorage';
+import { upload } from './multer.js';
 
 const localStorage = new LocalStorage('./localStorage');
 
@@ -33,7 +34,7 @@ app.get("/home", (req, res) => {
 app.get("/med/:id", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
         MedService.FindById(req.params.id).then(med => {
-           var farm = med.farms.length
+            var farm = med.farms.length
             res.render("med", { med: med, farm: farm })
         }).catch(err => {
             console.log(err);
@@ -214,21 +215,34 @@ app.get("/logout", (req, res) => {
 app.post("/cadFarm", (req, res) => {
     const { email, password, name, address, latitude, longitude, phone } = req.body
 
-    FarmService.Cad(email, password, name, address, latitude, longitude, phone)
-        .then(response => {
-            console.log(response)
+    UserService.Verify(email)
+        .then(x => {
+            if (x === null) {
+                UserService.Cad(name, email, password)
+                    .then(t => {
+                        FarmService.Cad(email, password, name, address, latitude, longitude, phone)
+                            .then(c => {
+                                res.redirect('/login')
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+            }
         }).catch(err => {
             console.log(err)
         });
 })
 
 app.post("/addFarm", (req, res) => {
-    FarmService.FindById('65496e004f89a7a06a85b83d').then((farm) => {
-        var id = '653ff2c9096ae4b558b11ee0'
+    FarmService.FindById(req.body.idFarm).then((farm) => {
+        var id = req.body.idMed
         var estoque = Number(req.body.estoque)
         var preco = Number(req.body.preco)
 
-        MedService.FindByIdAndUpdate(id, farm, estoque, preco)
+        MedService.FindByIdAndAdd(id, farm, estoque, preco)
             .then((response) => {
                 console.log(response)
             }).catch(err => {
@@ -239,14 +253,53 @@ app.post("/addFarm", (req, res) => {
     })
 })
 
-app.get('/farms/?:id', (req, res) => {
-    MedService.FindById(req.params.id)
-    .then((response) => {
-        res.render('farms', {farms: response.farms})
+app.post("/removeFarm", (req, res) => {
+    FarmService.FindById(req.body.idFarm).then((farm) => {
+        var id = req.body.idMed
+        MedService.FindByIdAndRemove(id, farm._id)
+            .then((response) => {
+                console.log("removido")
+            }).catch(err => {
+                console.log(err)
+            });
     }).catch(err => {
         console.log(err)
-    });
+    })
 })
+
+app.get('/farms/?:id', (req, res) => {
+    MedService.FindById(req.params.id)
+        .then((response) => {
+            res.render('farms', { farms: response.farms })
+        }).catch(err => {
+            console.log(err)
+        });
+})
+
+app.get('/image', (req, res) => {
+    if (localStorage.getItem("dadosUser")) {
+        const dados = JSON.parse(localStorage.getItem("dadosUser"));
+        res.render('image', { user: dados });
+    } else {
+        res.redirect('/login')
+    }
+
+});
+
+app.post('/upload', upload.single('imagem'), (req, res) => {
+    const nomeImagem = req.file.filename;
+    UserService.UpdateImage(req.body.id, nomeImagem)
+        .then(response => {
+            UserService.FindById(req.body.id)
+            .then(x => {
+                    localStorage.setItem("dadosUser", JSON.stringify(x));
+                    res.redirect('/perfil')
+                })
+        }).catch(err => {
+            console.error(err);
+        })
+});
+
 
 app.listen(8080, function (erro) {
     if (erro) {

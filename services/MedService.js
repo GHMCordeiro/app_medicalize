@@ -43,13 +43,14 @@ class Meds {
         return data
     }
 
-    FindByIdAndUpdate(id, data, estoque, preco){
+    FindByIdAndAdd(id, data, estoque, preco) {
         const res = Med.findByIdAndUpdate(id, {
             $push: {
                 farms: {
+                    id: data._id,
                     name: data.name,
                     address: data.address,
-                    localization:{
+                    localization: {
                         latitude: data.localization.latitude,
                         longitude: data.localization.longitude
                     },
@@ -62,6 +63,12 @@ class Meds {
 
         return res
     }
+
+    FindByIdAndRemove(id, farm) {
+        const res = Med.findByIdAndUpdate(id, { $pull: { farms: { id: farm } } })
+        return res
+    }
+
 }
 
 export default new Meds

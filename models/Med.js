@@ -55,6 +55,9 @@ const med = new mongoose.Schema({
     },
     farms:[
         {
+            id:{
+                type: String
+            },
             name:{
                 type: String
             },
