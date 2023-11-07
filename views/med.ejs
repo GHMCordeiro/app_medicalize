@@ -14,7 +14,7 @@
         <main>
             <section class="result-medicine">
                 <div class="medicine-image-row">
-                    <img src="/img/medicine.png" alt="">
+                    <img src="/uploads/<%= med.image %>" alt="">
                 </div>
 
                 <div class="medicine-info">
@@ -23,7 +23,9 @@
                             <%= med.nome %>
                         </p>
                         <p>
-                            <%= med.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                            <% if(farm!==0){ %>
+                                A partir de <%= preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                                    <% }%>
                         </p>
                     </div>
                     <p class="info-last-row">

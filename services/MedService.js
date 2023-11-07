@@ -4,13 +4,13 @@ import med from '../models/Med.js'
 const Med = mongoose.model('medicamentos', med);
 
 class Meds {
-    Cad(data) {
+    async Cad(data, imagem) {
         const cad = new Med({
             nome: data.nome,
-            preco: data.preco,
             tipo: data.tipo,
             concentracao: data.concentracao,
             qtd: data.qtd,
+            image: imagem,
             bula: {
                 serve: data.serve,
                 nao_usar: data.nao_usar,
@@ -22,9 +22,14 @@ class Meds {
             }
         })
 
-        cad.save()
-
-        return cad
+        try {
+            // Aguarde a conclusão da operação de salvamento
+            await cad.save();
+            return cad;
+        } catch (error) {
+            // Lide com erros, se houver algum
+            throw error;
+        }
     }
 
     GetAll() {

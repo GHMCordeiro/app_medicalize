@@ -13,26 +13,20 @@
 
         <main>
             <div class="reserved-medicines">
-                <% if(farms.length===1){ %>
+
+                <% farms.forEach(farm=> { %>
                     <div class="medicine">
-                        <p>
-                            <%= farms[0].name %>
-                        </p>
-                        <p>
-                            <%= farms[0].preco %>
-                        </p>
+                        <a href="">
+                            <p>
+                                <%= farm.name %>
+                            </p>
+                            <p>
+                                <%= farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                            </p>
+                        </a>
                     </div>
-                    <% } else{ %>
-                        <% farms.forEach(farm=> { %>
-                            <div class="medicine">
-                                <p>
-                                    <%= farm.name %>
-                                </p>
-                                <p>
-                                    <%= farm.preco %>
-                                </p>
-                            </div>
-                            <% })} %>
+                    <br><br>
+                    <% }) %>
             </div>
         </main>
 

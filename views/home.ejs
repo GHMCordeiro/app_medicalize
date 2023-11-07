@@ -34,7 +34,7 @@
                     <% meds.forEach(med=> { %>
                         <div class="card">
                             <div class="card-images">
-                                <img class="medicine" src="/img/medicine.png" alt="">
+                                <img class="medicine" src="/uploads/<%= med.image %>" alt="">
                                 <span class="star-icon"> <a href="/fav/<%= med._id %>"> <img
                                             src="/img/icons/star-outline_icon.svg" alt=""> </a></span>
                             </div>

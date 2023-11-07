@@ -6,11 +6,6 @@ const med = new mongoose.Schema({
         type:String,
         required:true
     },
-    preco:{
-        type:Number,
-        default: 0.0,
-        required:true
-    },
     tipo:{
         type: String,
         required:true
@@ -22,6 +17,10 @@ const med = new mongoose.Schema({
     qtd:{
         type: String,
         required: true
+    },
+    image:{
+        type: String,
+        default: 'generico.jpg'
     },
     bula:{
         serve:{

@@ -31,11 +31,30 @@ app.get("/home", (req, res) => {
     }
 })
 
+app.post("/cadMed", upload.single('imagem'), (req, res) => {
+    const data = req.body
+    MedService.Cad(data, req.file.filename)
+    .then(response => {
+        res.send(response)
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
 app.get("/med/:id", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
+        let menorPreco = Infinity;
+
         MedService.FindById(req.params.id).then(med => {
+            med.farms.forEach(f => {
+                if (f.preco < menorPreco) {
+                    menorPreco = f.preco;
+                  }
+            })
+
             var farm = med.farms.length
-            res.render("med", { med: med, farm: farm })
+            res.render("med", { med: med, farm: farm, preco: menorPreco })
+
         }).catch(err => {
             console.log(err);
         })
@@ -299,6 +318,8 @@ app.post('/upload', upload.single('imagem'), (req, res) => {
             console.error(err);
         })
 });
+
+
 
 
 app.listen(8080, function (erro) {
