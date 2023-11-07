@@ -1,0 +1,83 @@
+<%- include('partials/header.ejs') %>
+    <div class="wrapper">
+        <div class="logo-row">
+            <img src="/img/logo-medicalize.png" alt="">
+            <h1>Medicalize</h1>
+        </div>
+        <div class="login-texts-row">
+            <p>Crie sua conta</p>
+            <p>Conheça nossos recursos</p>
+        </div>
+        <form action="/cadUser" method="post">
+            <% if(msg==='1' ){ %>
+                <div class="alert-noti">
+                    <p>Aceite os termos!</p>
+                    <br>
+                </div>
+                <% } else if(msg==='2' ){ %>
+                    <div class="alert-noti">
+                        <p>Senhas não conferem!</p>
+                        <br>
+                    </div>
+                    <% } else if(msg==='3' ) { %>
+                        <div class="alert-noti">
+                            <p>Preencha todos os campos!</p>
+                            <br>
+                        </div>
+                        <% } else if(msg==='4' ) { %>
+                            <div class="alert-noti">
+                                <p>Email já cadastrado!</p>
+                                <br>
+                            </div>
+                            <% } %>
+                                <div class="login-form">
+                                    <div class="login-form-row">
+                                        <label for="nome-usuario">Nome</label>
+                                        <input type="text" name="name" id="nome-usuario"
+                                            placeholder="Entre com seu nome completo">
+                                    </div>
+
+                                    <div class="login-form-row">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email" placeholder="Entre com seu email">
+                                    </div>
+
+                                    <div class="login-form-row">
+                                        <label for="senha">Senha</label>
+                                        <div class="show-hide-passwd">
+                                            <input type="password" name="password" id="senha"
+                                                placeholder="Entre com sua senha">
+                                            <img class="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="login-form-row">
+                                        <label for="repetir-senha">Repetir senha</label>
+                                        <div class="show-hide-passwd">
+                                            <input type="password" name="confPassword" id="repetir-senha"
+                                                placeholder="Repita sua senha">
+                                            <img class="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="terms-conditions">
+                                        <input type="checkbox" name="confTerm" id="termos">
+                                        <label for="termos">Li e concordo com os termos</label>
+                                    </div>
+                                    <div class="login-buttons">
+                                        <button type="submit" class="default-button">Entrar</button>
+                                        <div class="login-buttons-divise">
+                                            <hr>
+                                            <p>Ou</p>
+                                            <hr>
+                                        </div>
+                                        <button class="alternative-button">
+                                            <img src="/img/icons/google-logo_icon.png" alt="">
+                                            Entrar com google
+                                        </button>
+                                    </div>
+                                    <p class="redirect-link">Já possui uma conta? <a href="/">Clique aqui</a></p>
+                                </div>
+        </form>
+    </div>
+
+    <%- include('partials/footer.ejs') %>

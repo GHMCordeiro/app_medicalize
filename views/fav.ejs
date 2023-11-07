@@ -1,0 +1,70 @@
+<%- include('partials/header.ejs') %>
+
+    <div class="container">
+        <header>
+            <div class="header-row">
+                <span> <a href="/home"><img src="/img/icons/chevron-left_icon.svg" alt=""></a></span>
+
+                <p>Favoritos</p>
+
+                <span></span>
+            </div>
+        </header>
+        <main>
+            <div class="order-row">
+                <label for="options">Ordenar por:</label>
+                <select name="order" id="order">
+                    <option value="1">Asc</option>
+                    <option value="2">Desc</option>
+                </select>
+                <img src="/img/icons/menu-down_icon.svg" alt="">
+            </div>
+            <div class="reserved-medicines">
+                <% if(favs !=='n' ){ %>
+                    <% favs.forEach(fav=> { %>
+                        <div class="reserved-medicine-row">
+                            <div class="medicine-image">
+                                <img src="/img/medicine.png" alt="">
+                            </div>
+                            <div class="medicine-infos">
+                                <div class="info-first-text-group">
+                                    <a href="/med/<%= fav.id %>">
+                                        <p>
+                                            <%= fav.nome %>
+                                        </p>
+                                        <p>
+                                            <%= fav.tipo %>, <%= fav.concentracao %>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="info-last-text-group">
+                                    <div class="first-column">
+                                        <p class="info-text">
+                                            <%= fav.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL'
+                                                }) %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <span class="star-icon"> <a href="/desFav/<%= fav._id %>"> <img
+                                                    src="/img/icons/star_icon.svg" alt=""> </a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% })} else{ %>
+                            <div class="medicine-infos">
+                                <div class="info-first-text-group">
+                                    <p>
+                                        Sem resultados!
+                                    </p>
+                                </div>
+                            </div>
+                            <% } %>
+            </div>
+
+            <%- include('partials/nav_bottom.ejs') %>
+
+    </div>
+    </main>
+
+    <%- include('partials/footer.ejs') %>

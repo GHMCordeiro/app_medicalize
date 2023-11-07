@@ -1,0 +1,139 @@
+<%- include('partials/header.ejs') %>
+
+    <div class="container">
+        <header>
+            <div class="header-row">
+                <span> <a href="/home"><img src="/img/icons/chevron-left_icon.svg" alt=""></a></span>
+
+                <p>Medicamento</p>
+
+                <span><a href="/fav/<%= med._id %>"><img src="/img/icons/star-outline_icon.svg" alt=""></a></span>
+            </div>
+        </header>
+
+        <main>
+            <section class="result-medicine">
+                <div class="medicine-image-row">
+                    <img src="/img/medicine.png" alt="">
+                </div>
+
+                <div class="medicine-info">
+                    <div class="info-first-row">
+                        <p>
+                            <%= med.nome %>
+                        </p>
+                        <p>
+                            <%= med.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                        </p>
+                    </div>
+                    <p class="info-last-row">
+                        <%= med.tipo %>, <%= med.concentracao %>
+                    </p>
+                </div>
+
+                <div class="collection-points-row">
+                    <a href="#">
+                        <div class="collection-points">
+                            <span><img src="/img/icons/map-marker-check-outline.svg" alt=""></span>
+                            <p>Disponível em 3 farmácias próximas</p>
+                            <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="medicine-bula">
+                    <p class="title">Informações</p>
+                    <div class="leaflet-items">
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Parar que serve
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.serve %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Quando não usar
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.nao_usar %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Como armazenar
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.armazenar %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Como funciona
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.como_funciona %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Saber antes de usar
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.saber_antes %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Reações
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.reacoes %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="leaflet-item">
+                            <div class="leaflet-item-header">
+                                Como utilizar
+                                <span>&plus;</span>
+                            </div>
+                            <div class="leaflet-item-body">
+                                <div class="leaflet-item-body-content">
+                                    <%= med.bula.utilizar %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="default-button">Comprar</button>
+                </div>
+            </section>
+        </main>
+        <%- include('partials/nav_bottom.ejs') %>
+
+    </div>
+
+    <%- include('partials/footer.ejs') %>

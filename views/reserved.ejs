@@ -1,0 +1,89 @@
+<%- include('partials/header.ejs') %>
+
+<header>
+    <div class="header-row">
+        <span><a href="/home"><img src="/img/icons/chevron-left_icon.svg" alt=""></a></span>
+        
+        <p>Reservados(3)</p>
+        
+        <span><img src="/img/icons/star-outline_icon.svg" alt=""></span>
+    </div>
+</header>
+
+<main>
+    <div class="order-row">
+        <label for="options">Ordenar por:</label>
+        <select name="order" id="order">
+            <option value="1">Maior tempo</option>
+            <option value="2">Menor tempo</option>
+        </select>
+        <img src="/img/icons/menu-down_icon.svg" alt="">
+    </div>
+    <div class="reserved-medicines">
+        <div class="reserved-medicine-row">
+            <div class="medicine-image">
+                <img src="/img/medicine.png" alt="">
+            </div>
+            <div class="medicine-infos">
+                <div class="info-first-text-group">
+                    <p>Rivotril</p>
+                    <p>Solução oral, 20ml</p>
+                </div>
+                <div class="info-last-text-group">
+                    <div class="first-column">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="4" cy="4.5" r="4" fill="#91C483"/>
+                        </svg>
+                        <p class="info-text">17:00h para retirada</p>
+                    </div>
+                    <img src="/img/icons/map-marker-plus_icon.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="reserved-medicine-row">
+            <div class="medicine-image">
+                <img src="/img/medicine.png" alt="">
+            </div>
+            <div class="medicine-infos">
+                <div class="info-first-text-group">
+                    <p>Rivotril</p>
+                    <p>Solução oral, 20ml</p>
+                </div>
+                <div class="info-last-text-group">
+                    <div class="first-column">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="4" cy="4.5" r="4" fill="#E5B400"/>
+                        </svg>
+                        <p class="info-text">09:00h para retirada</p>
+                    </div>
+                    <img src="/img/icons/map-marker-plus_icon.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="reserved-medicine-row">
+            <div class="medicine-image">
+                <img src="/img/medicine.png" alt="">
+            </div>
+            <div class="medicine-infos">
+                <div class="info-first-text-group">
+                    <p>Rivotril</p>
+                    <p>Solução oral, 20ml</p>
+                </div>
+                <div class="info-last-text-group">
+                    <div class="first-column">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="4" cy="4.5" r="4" fill="#FF6464"/>
+                        </svg>
+                        <p class="info-text">02:00h para retirada</p>
+                    </div>
+                    <img src="/img/icons/map-marker-plus_icon.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/nav_bottom.ejs') %>
+<%- include('partials/footer.ejs') %>

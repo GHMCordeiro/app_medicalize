@@ -1,0 +1,50 @@
+<%- include('partials/header.ejs') %>
+
+    <form action="/verifyUser" method="POST">
+        <div class="wrapper">
+            <div class="logo-row">
+                <img src="/img/logo-medicalize.png" alt="">
+                <h1>Medicalize</h1>
+            </div>
+            <div class="login-texts-row">
+                <p>Bem vindo de volta!</p>
+                <p>Continue usando nossos recursos</p>
+            </div>
+            <% if(msg==='1' ){ %>
+                <div class="alert-noti">
+                    <p>Usuário e/ou senha incorreto(s)</p>
+                    <br>
+                </div>
+                <% } %>
+                    <div class="login-form">
+                        <div class="login-form-row">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" placeholder="Entre com seu email">
+                        </div>
+
+                        <div class="login-form-row">
+                            <label for="senha">Senha</label>
+                            <div class="show-hide-passwd">
+                                <input type="password" name="password" id="senha" placeholder="Entre com sua senha">
+                                <img id="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
+                            </div>
+                        </div>
+                        <a href="" class="forgot-password">Esqueci minha senha</a>
+                        <div class="login-buttons">
+                            <button class="default-button">Entrar</button>
+                            <div class="login-buttons-divise">
+                                <hr>
+                                <p>Ou</p>
+                                <hr>
+                            </div>
+                            <button type="submit" class="alternative-button">
+                                <img src="/img/icons/google-logo_icon.png" alt="">
+                                Entrar com google
+                            </button>
+                        </div>
+                        <p class="redirect-link">Não possui uma conta? <a href="/signup">Clique aqui</a></p>
+                    </div>
+        </div>
+    </form>
+
+    <%- include('partials/footer.ejs') %>
