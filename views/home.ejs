@@ -1,0 +1,59 @@
+<%- include('partials/header.ejs') %>
+
+    <div class="container">
+        <section class="search-field-row">
+            <form action="/searchMed" method="POST">
+                <div class="search-field">
+                    <input type="text" name="search" id=""  placeholder="Buscar medicamento">
+                    <button type="submit">
+                        <img src="/img/icons/magnify_icon.svg" alt="">
+                    </button>
+                </div>
+            </form>
+
+            <span class="search-image">
+                <img src="/img/icons/camera-outline_icon.svg" alt="">
+            </span>
+        </section>
+        <div class="scroll-area">
+            <section class="collection-points-row">
+                <a href="#">
+                    <div class="collection-points">
+                        <span><img src="/img/icons/map-marker-check-outline.svg" alt=""></span>
+                        <p>Pontos de coleta</p>
+                        <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
+                    </div>
+                </a>
+            </section>
+            <section class="cards-area">
+                <div class="cards-area-texts">
+                    <p>Ultimas buscas</p>
+                    <p>Ver tudo</p>
+                </div>
+                <div class="cards-area-grid">
+                    <% meds.forEach(med=> { %>
+                        <div class="card">
+                            <div class="card-images">
+                                <img class="medicine" src="/img/medicine.png" alt="">
+                                <span class="star-icon"> <a href="/fav/<%= med._id %>"> <img
+                                            src="/img/icons/star-outline_icon.svg" alt=""> </a></span>
+                            </div>
+                            <div class="card-texts">
+                                <a href="/med/<%= med._id %>">
+                                    <p>
+                                        <%= med.nome %>
+                                    </p>
+                                    <p>Solução oral, 20ml</p>
+                                </a>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </section>
+        </div>
+
+        <%- include('partials/nav_bottom.ejs') %>
+
+    </div>
+
+    <%- include('partials/footer.ejs') %>

@@ -1,0 +1,678 @@
+:root {
+    --color-primary: #91C483;
+    --color-exception: #FF6464;
+    --background-color: #fefefe;
+    --font-color: #323232;
+    --default-font-size: 1.15rem;
+    --smaller-font-size: 0.9rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--default-font-size);
+    letter-spacing: 0.02rem;
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    height: inherit;
+}
+
+.wrapper{
+    height: inherit;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/*ESTILO GERAL*/
+.default-button,
+.alternative-button{
+    display: flex;
+    height: 47px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.default-button{            
+    background-color: var(--color-primary);
+    color: #FFF;
+}
+
+.alternative-button{
+    background-color: #FFF;
+    border: 2px solid #757575;
+}
+
+button:active{
+    transform: scale(0.98);
+}
+
+header .header-row{
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.header-row span{
+    width: 50px;
+    display: flex;
+}
+
+.header-row p{
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.header-row span:first-child{
+    justify-content: left;
+}
+
+.header-row span:first-child img{
+    height: 20px;
+}
+
+.header-row span:last-child{
+    justify-content: right;
+}
+
+.header-row span:last-child img{
+    height: 24px;
+}
+
+.nav-bottom{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #CDCDCD;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.nav-bottom svg{
+    width: 24px;
+    fill: var(--font-color);
+}
+
+.title{
+    font-size: 1.125rem;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.order-row{
+    padding: 20px 20px 10px 20px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 5px;
+    font-weight: 400;
+}
+
+.order-row label{
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.order-row select{
+    appearance: none;
+    font-size: 0.9rem;
+}
+
+option{
+    
+}
+
+.order-row img{
+    width: 14px;
+}
+
+/* TELA DE LOGIN E DE CADASTRO */
+.logo-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo-row img{
+    width: 50px;
+}
+
+.login-texts-row{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-texts-row p:first-child{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.login-texts-row p:last-child{
+    font-size: 1rem;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-form-row{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-form-row input[type="text"]{
+    height: 47px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #757575;
+}
+
+.show-hide-passwd{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #757575;
+}
+
+.show-hide-passwd input[type="text"]{
+    height: inherit;
+    width: 100%;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.login-form-row input[type="text"]:focus,
+.show-hide-passwd:focus-within{
+    border: 2px solid var(--font-color);
+}
+
+.show-hide-passwd input[type="text"]:focus{
+    border: none;
+}
+
+.login-form-row input[type="text"]::placeholder,
+.login-form-row input[type="password"]::placeholder,
+.search-field input[type="text"]::placeholder{
+    color: #757575;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.show-hide-passwd input[type="password"]{
+    width: 100%;
+}
+
+.forgot-password{
+    display: block;
+    text-align: right;
+    text-decoration: underline;
+    color: var(--color-primary);
+    font-size: 1rem;
+    margin-bottom: 40px;
+}
+
+.terms-conditions{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.terms-conditions label{
+    font-size: 1rem;
+}
+
+.terms-conditions input[type="checkbox"] {
+  display: none;
+}
+
+.terms-conditions input[type="checkbox"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #757575;
+  background-color: #fff;
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.terms-conditions input[type="checkbox"]:checked + label::before {
+  background-color: var(--color-primary);
+}
+
+.login-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* margin-bottom: 140px; */
+}
+
+.login-buttons-divise{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-buttons-divise hr {
+    width: 100%;
+    border: 1px solid #757575; 
+}
+
+.login-buttons-divise p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 10px;
+}
+
+.redirect-link{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 1.5rem;
+    text-align: center;
+}
+
+.redirect-link,
+.redirect-link a{
+    font-size: 1rem;
+}
+
+.redirect-link a{
+    text-decoration: underline;
+}
+
+/* TELA PRINCIPAL */
+.search-field-row{
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.search-field{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #757575;
+}
+
+.search-field button{
+    width: 57px;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    fill: none;
+}
+
+.search-field img{
+    width: 18px;
+}
+
+.search-field input[type="text"]{
+    padding: 0 10px;
+    width: 100%;
+    height: 43px;
+    border-right: 1px solid #7575759c;
+    border-radius: 9px 0 0 9px;
+    background: none;
+}
+
+.search-image{
+    width: 57px;
+    height: 47px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+}
+
+.scroll-area{
+    padding: 10px 0;
+    height: calc(100% - 125px);
+    overflow: scroll;
+}
+
+.collection-points-row {
+    padding: 0 20px;
+}
+
+.collection-points{ 
+    padding: 10px;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    border-radius: 0.625rem;
+    background: #D6E8D1;
+    /* box-shadow: 0px 4px 8px -4px rgba(22, 34, 51, 0.08), 0px 16px 24px 0px rgba(22, 34, 51, 0.08); */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.collection-points span:first-child{
+    display: flex;
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #91C483;
+}
+
+.collection-points span:first-child img{
+    width: 14px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.collection-points span:last-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 0.25rem;
+}
+
+.collection-points span:last-child img{
+    height: var(--default-font-size);
+    flex-shrink: 0;
+}
+
+.collection-points p{
+    width: 100%;
+    padding: 0 10px;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.cards-area-texts{
+    margin: 20px 20px 10px 20px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #CDCDCD;
+}
+
+.cards-area-texts p:first-child{
+    font-size: var(--default-font-size);
+    font-weight: 700;
+}
+
+.cards-area-texts p:last-child{
+    font-size: 0.8rem;
+}
+
+.cards-area-grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.card{
+    width: 165px;
+    border-radius: 10px;
+
+    background: #FFF;
+    /* box-shadow: 0px 4px 8px -4px rgba(22, 34, 51, 0.08), 0px 16px 24px 0px rgba(22, 34, 51, 0.08); */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.card-images{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.card-images .medicine{
+    height: 125px;
+}
+
+.card-images .star-icon{
+    position: absolute;
+    right: 10px;
+    top: 10px; 
+}
+
+.card-images .star-icon img{
+    width: 20px;
+}
+
+.card-texts{
+    padding: 10px;
+}
+
+.card-texts p:nth-child(1){
+    font-size: var(--font-size-primary);
+    font-weight: 600;
+}
+
+.card-texts p:nth-child(2){
+    font-size: var(--smaller-font-size);
+}
+
+/* TELA RESULTADO DA BUSCA */
+
+main{
+    height:calc(100vh - 106px);
+}
+
+.result-medicine{
+    height: inherit;
+    overflow: scroll;
+}
+
+.medicine-image-row{
+    display: flex;
+    justify-content: center;
+    height: 250px;
+    padding: 10px;
+}
+
+.medicine-info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0px 20px 20px 20px;
+}
+
+.info-first-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-first-row p{
+    font-size: 1.1rem;
+}
+
+.info-first-row p:first-child{
+    font-weight: 600;
+}
+
+.info-last-row{
+    font-size: var(--smaller-font-size);
+}
+
+.medicine-bula{
+    padding: 20px 20px 10px 20px;
+}
+
+.leaflet-items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.leaflet-item{
+    transition: padding 0.2s ease-out;
+    background-color: #FFF;
+}
+
+.leaflet-item-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    /* border-bottom: 1px solid #CDCDCD; */
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #f4f4f4;
+}
+
+.leaflet-item-header span{
+    font-size: 1.7rem;
+    font-weight: normal;
+}
+
+.leaflet-item-header.active{
+    border: none;
+    background-color: var(--color-primary);
+}
+
+.leaflet-item-body {
+    max-height: 0;
+    overflow: hidden;
+    /* padding: 0 10px 10px 10px; */
+    transition: max-height 0.2s ease-out;
+}
+
+.leaflet-item-body-content {
+    height: max-content;
+    padding: 0 10px 10px 10px;
+    font-size: 1.1rem;
+}
+
+.leaflet-item:has(.leaflet-item-header.active) {
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    transition: padding 0.2s ease-out;
+}
+
+.medicine-bula .default-button{
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* TELA DE MEDICAMENTOS RESERVADOS */
+#reserved .header-row span:last-child img{
+    visibility: hidden;
+}
+
+.reserved-medicines{
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reserved-medicine-row{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #CDCDCD;
+}
+
+.medicine-image{
+    width: 95px;
+    height: 80px;
+    display: grid;
+    place-items: center;
+}
+
+.medicine-image img{
+    height: inherit;
+}
+
+.medicine-infos{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-first-text-group p:first-child{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.info-first-text-group p:last-child{
+    font-size: 1rem;
+}
+
+.info-last-text-group{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-last-text-group .first-column{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.info-last-text-group .first-column p{
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.info-last-text-group img{
+    width: 20px;
+}
+
+.alert-noti{
+    --font-color: #e90000;
+}
