@@ -81,14 +81,6 @@ const med = new mongoose.Schema({
                 type: Number
             }
         }
-    ],
-    favUser: [
-        {
-            id: {
-                type: String
-            }
-        }
-
     ]
 })
 

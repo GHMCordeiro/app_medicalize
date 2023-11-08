@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import UserService from './services/UserService.js';
 import MedService from './services/MedService.js';
 import FarmService from './services/FarmService.js';
+import ReserveService from './services/ReserveService.js';
 import { LocalStorage } from 'node-localstorage';
 import { upload } from './multer.js';
 
@@ -19,17 +20,10 @@ app.use(bodyParser.json()) // Permite a utilização de dados via JSON
 app.set('view engine', 'ejs')
 
 
-
 app.get("/home", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
+
         MedService.GetAll().then(meds => {
-            meds.forEach((med) => {
-                if (med.favUser.id) {
-                    console.log(med.favUser)
-                }else{
-                    console.log("Not found")
-                }
-            })
             res.render("home", { meds: meds });
         })
     } else {
@@ -135,6 +129,7 @@ app.get("/favoritos", (req, res) => {
             .then((data) => {
                 if (data.favMed.length > 0) {
                     var fav = data.favMed
+                    console.log(fav)
                     res.render("fav", { favs: fav })
                 } else {
                     res.render("fav", { favs: 'n' })
@@ -152,21 +147,47 @@ app.get("/fav/:id", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
         const dados = localStorage.getItem("dadosUser")
         var user = JSON.parse(dados)
+        var menorPreco = Infinity
 
-        MedService.FavUser(req.params.id, user._id)
-            .then((x) => {
-                MedService.FindById(req.params.id)
-                    .then((data) => {
-                        UserService.Fav(user._id, data)
-                            .then((response) => {
-                                res.redirect('/home')
-                            }).catch((err) => {
-                                console.log(err)
-                            })
-                    }).catch((err) => {
-                        console.log(err);
-                    })
-            });
+        MedService.FindById(req.params.id)
+            .then((data) => {
+                if (data.farms.length > 0) {
+                    var aux = data.farms
+                    aux.forEach(element => {
+                        if (element.preco < menorPreco) {
+                            menorPreco = element.preco;
+                        }
+                    });
+                    UserService.Fav(user._id, data, menorPreco)
+                        .then((response) => {
+                            UserService.FindById(user._id)
+                                .then(x => {
+                                    localStorage.setItem("dadosUser", JSON.stringify(x));
+                                    res.redirect('/home')
+                                }).catch((error) => {
+                                    console.error(error)
+                                })
+                        }).catch((err) => {
+                            console.log(err)
+                        })
+                } else {
+                    UserService.Fav(user._id, data, 0)
+                        .then((response) => {
+                            UserService.FindById(user._id)
+                                .then(x => {
+                                    localStorage.setItem("dadosUser", JSON.stringify(x));
+                                    res.redirect('/home')
+                                }).catch((error) => {
+                                    console.error(error)
+                                })
+                        }).catch((err) => {
+                            console.log(err)
+                        })
+                }
+
+            }).catch((err) => {
+                console.log(err);
+            })
 
     } else {
         res.redirect('/login')
@@ -179,13 +200,12 @@ app.get("/desFav/:id", (req, res) => {
         const dados = localStorage.getItem("dadosUser")
         var user = JSON.parse(dados)
 
-        MedService.DesFavUser(req.params.id, user._id)
-            .then(respoonse => {
-                UserService.DesFav(user._id, req.params.id)
-                    .then(x => {
+        UserService.DesFav(user._id, req.params.id)
+            .then(x => {
+                UserService.FindById(user._id)
+                    .then(t => {
+                        localStorage.setItem("dadosUser", JSON.stringify(t))
                         res.redirect('/favoritos')
-                    }).catch(err => {
-                        console.log(err)
                     })
             }).catch(err => {
                 console.log(err)
@@ -305,7 +325,7 @@ app.post("/removeFarm", (req, res) => {
 app.get('/farms/?:id', (req, res) => {
     MedService.FindById(req.params.id)
         .then((response) => {
-            res.render('farms', { farms: response.farms })
+            res.render('farms', { farms: response.farms, idMed: req.params.id })
         }).catch(err => {
             console.log(err)
         });
@@ -335,7 +355,41 @@ app.post('/upload', upload.single('imagem'), (req, res) => {
         })
 });
 
+app.get("/reservar/:idFarm/:idMed", (req, res) => {
+    res.render("reserve", { idFarm: req.params.idFarm, idMed: req.params.idMed });
+})
 
+app.post('/reservar', upload.single('imagem'), (req, res) => {
+    const user = JSON.parse(localStorage.getItem("dadosUser"))
+    MedService.FindById(req.body.idMed)
+        .then(m => {
+            var price = 0
+
+            const data = {
+                idUser: user._id,
+                med: {
+                    id: req.body.idMed,
+                    name: m.nome,
+                    tipo: m.tipo,
+                    concentracao: m.concentracao
+                },
+                name: req.body.name,
+                phone: req.body.phone,
+                prescricao: req.file.filename,
+                price: price
+            }
+
+            FarmService.FindById(req.body.idFarm)
+                .then(response => {
+                    ReserveService.Cad(data, response)
+                        .then(x => {
+                            res.redirect('/home')
+                        }).catch(err => {
+                            console.log(err)
+                        });
+                })
+        })
+})
 
 
 app.listen(8080, function (erro) {

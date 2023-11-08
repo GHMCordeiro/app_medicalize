@@ -74,15 +74,6 @@ class Meds {
         return res
     }
 
-    FavUser(idMed, idUser) {
-        const res = Med.findByIdAndUpdate(idMed, { $push: { favUser: { id: idUser } } })
-        return res
-    }
-
-    DesFavUser(idMed, idUser) {
-        const res = Med.findByIdAndUpdate(idMed, { $pull: { favUser: { id: idUser } } })
-        return res
-    }
 
 }
 

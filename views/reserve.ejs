@@ -1,0 +1,14 @@
+<%- include('partials/header.ejs') %>
+<div>
+    <form action="/reservar" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idFarm" value="<%= idFarm %>">
+        <input type="hidden" name="idMed" value="<%= idMed %>">
+        <input type="text" name="name" placeholder="Nome"><br><br><br>
+        <input type="text" name="phone" placeholder="Telefone"><br><br><br>
+        <input type="file" name="imagem" placeholder="Prescrição Médica"><br><br><br>
+        <input type="number" name="qtd" id="">
+        <input type="submit" value="Reservar">
+    </form>
+</div>
+<%- include('partials/nav_bottom.ejs') %>
+<%- include('partials/footer.ejs') %>

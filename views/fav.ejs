@@ -40,8 +40,12 @@
                                 <div class="info-last-text-group">
                                     <div class="first-column">
                                         <p class="info-text">
-                                            <%= fav.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL'
-                                                }) %>
+                                            <% if(fav.preco> 0){ %>
+                                                A partir de <%= fav.preco.toLocaleString('pt-BR', { style: 'currency' ,
+                                                    currency: 'BRL' }) %>
+                                                    <% }else{ %>
+                                                        Indisponível
+                                                        <% } %>
                                         </p>
                                     </div>
                                     <div>

@@ -30,13 +30,13 @@ class User {
         return data
     }
 
-    Fav(id, data) {
+    Fav(id, data, preco) {
         const res = users.findByIdAndUpdate(id, {
             $push: {
                 favMed: {
                     id: data._id,
                     nome: data.nome,
-                    preco: data.preco,
+                    preco: preco,
                     tipo: data.tipo,
                     concentracao: data.concentracao,
                     qtd: data.qtd,

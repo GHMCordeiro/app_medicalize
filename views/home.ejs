@@ -32,15 +32,16 @@
                 </div>
                 <div class="cards-area-grid">
                     <% meds.forEach(med=> { %>
-                        <%= meds.favUser %>
                         <div class="card">
                             <div class="card-images">
                                 <img class="medicine" src="/uploads/<%= med.image %>" alt="">
+
                                 <span class="star-icon">
-                                    <a href="/fav/<%= med._id %>">
-                                        <img src="/img/icons/star-outline_icon.svg" alt="">
-                                    </a>
+                                    <!--  <a href="/desFav/<%= med._id %>"> -->
+                                    <img src="/img/icons/star-outline_icon.svg" alt="">
+                                    <!-- </a> -->
                                 </span>
+
                             </div>
                             <div class="card-texts">
                                 <a href="/med/<%= med._id %>">
