@@ -24,7 +24,7 @@
                     <% favs.forEach(fav=> { %>
                         <div class="reserved-medicine-row">
                             <div class="medicine-image">
-                                <img src="/img/medicine.png" alt="">
+                                <img src="/uploads/<%= fav.image %>" alt="">
                             </div>
                             <div class="medicine-infos">
                                 <div class="info-first-text-group">
@@ -45,7 +45,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <span class="star-icon"> <a href="/desFav/<%= fav._id %>"> <img
+                                        <span class="star-icon"> <a href="/desFav/<%= fav.id %>"> <img
                                                     src="/img/icons/star_icon.svg" alt=""> </a></span>
                                     </div>
                                 </div>

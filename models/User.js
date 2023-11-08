@@ -38,6 +38,9 @@ const user = new mongoose.Schema({
             },
             qtd: {
                 type: String,
+            },
+            image:{
+                type: String
             }
         }
     ]

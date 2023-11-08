@@ -2,85 +2,93 @@ import mongoose from "mongoose"
 
 
 const med = new mongoose.Schema({
-    nome:{
-        type:String,
-        required:true
-    },
-    tipo:{
-        type: String,
-        required:true
-    },
-    concentracao:{
-        type: String,
-        required:true
-    },
-    qtd:{
+    nome: {
         type: String,
         required: true
     },
-    image:{
+    tipo: {
+        type: String,
+        required: true
+    },
+    concentracao: {
+        type: String,
+        required: true
+    },
+    qtd: {
+        type: String,
+        required: true
+    },
+    image: {
         type: String,
         default: 'generico.jpg'
     },
-    bula:{
-        serve:{
+    bula: {
+        serve: {
             type: String,
             required: true
         },
-        nao_usar:{
+        nao_usar: {
             type: String,
             required: true
         },
-        armazenar:{
+        armazenar: {
             type: String,
             required: true
         },
-        como_funciona:{
+        como_funciona: {
             type: String,
             required: true
         },
-        saber_antes:{
+        saber_antes: {
             type: String,
             required: true
         },
-        reacoes:{
+        reacoes: {
             type: String,
             required: true
         },
-        utilizar:{
+        utilizar: {
             type: String,
             required: true
         }
     },
-    farms:[
+    farms: [
         {
-            id:{
+            id: {
                 type: String
             },
-            name:{
+            name: {
                 type: String
             },
-            address:{
+            address: {
                 type: String
             },
-            localization:{
-                latitude:{
-                    type:String
+            localization: {
+                latitude: {
+                    type: String
                 },
-                longitude:{
-                    type:String
+                longitude: {
+                    type: String
                 }
             },
-            phone:{
-                type:String
+            phone: {
+                type: String
             },
-            estoque:{
-                type:Number
+            estoque: {
+                type: Number
             },
-            preco:{
-                type:Number
+            preco: {
+                type: Number
             }
         }
+    ],
+    favUser: [
+        {
+            id: {
+                type: String
+            }
+        }
+
     ]
 })
 

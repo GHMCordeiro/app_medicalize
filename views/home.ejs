@@ -4,7 +4,7 @@
         <section class="search-field-row">
             <form action="/searchMed" method="POST">
                 <div class="search-field">
-                    <input type="text" name="search" id=""  placeholder="Buscar medicamento">
+                    <input type="text" name="search" id="" placeholder="Buscar medicamento">
                     <button type="submit">
                         <img src="/img/icons/magnify_icon.svg" alt="">
                     </button>
@@ -32,18 +32,24 @@
                 </div>
                 <div class="cards-area-grid">
                     <% meds.forEach(med=> { %>
+                        <%= meds.favUser %>
                         <div class="card">
                             <div class="card-images">
                                 <img class="medicine" src="/uploads/<%= med.image %>" alt="">
-                                <span class="star-icon"> <a href="/fav/<%= med._id %>"> <img
-                                            src="/img/icons/star-outline_icon.svg" alt=""> </a></span>
+                                <span class="star-icon">
+                                    <a href="/fav/<%= med._id %>">
+                                        <img src="/img/icons/star-outline_icon.svg" alt="">
+                                    </a>
+                                </span>
                             </div>
                             <div class="card-texts">
                                 <a href="/med/<%= med._id %>">
                                     <p>
                                         <%= med.nome %>
                                     </p>
-                                    <p>Solução oral, 20ml</p>
+                                    <p>
+                                        <%= med.tipo %>, <%= med.concentracao %>
+                                    </p>
                                 </a>
                             </div>
                         </div>

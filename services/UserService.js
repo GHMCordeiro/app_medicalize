@@ -39,7 +39,8 @@ class User {
                     preco: data.preco,
                     tipo: data.tipo,
                     concentracao: data.concentracao,
-                    qtd: data.qtd
+                    qtd: data.qtd,
+                    image: data.image
                 }
             }
         })
@@ -48,7 +49,7 @@ class User {
     }
 
     DesFav(idUser, med) {
-        const res = users.findByIdAndUpdate(idUser, { $pull: { favMed: { _id: med } } })
+        const res = users.findByIdAndUpdate(idUser, { $pull: { favMed: { id: med } } })
         return res
     }
 
