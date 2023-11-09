@@ -1,9 +1,8 @@
 <%- include('partials/header.ejs') %>
-
     <div class="container">
         <header>
             <div class="header-row">
-                <span> <a href="/home"><img src="/img/icons/chevron-left_icon.svg" alt=""></a></span>
+                <span><img src="/img/icons/chevron-left_icon.svg" alt=""></span>
 
                 <p>Selecione a farmácia</p>
 
@@ -12,22 +11,54 @@
         </header>
 
         <main>
-            <div class="reserved-medicines">
-
-                <% farms.forEach(farm=> { %>
-                    <div class="medicine">
-                        <a href="/reservar/<%= farm.id %>/<%= idMed %>">
-                            <p>
-                                <%= farm.name %>
-                            </p>
-                            <p>
-                                <%= farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
-                            </p>
-                        </a>
+            <form action="/choosefarm" method="post">
+                <div class="preview-options">
+                    <div class="preview-options-row">
+                        <div class="preview-map">Mapa</div>
+                        <div class="preview-list">Lista</div>
                     </div>
-                    <br><br>
-                    <% }) %>
-            </div>
+                    <div class="list-pharmacies">
+                        <% farms.forEach(farm=> { %>
+                            <div class="pharmacy">
+                                <div class="pharmacy-header">
+                                    <p>
+                                        <%= farm.name %>
+                                    </p>
+                                    <p>
+                                        <%= farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' })
+                                            %>
+                                    </p>
+                                </div>
+                                <div class="pharmacy-content">
+                                    <p>
+                                        <%= farm.address %>
+                                    </p>
+                                    <div>
+                                        <img src="/img/icons/clock-outline_icon.svg" alt="">
+                                        <p>Seg a Sex - 09:00 as 23:00</p>
+                                    </div>
+                                    <div>
+                                        <img src="/img/icons/phone_icon.svg" alt="">
+                                        <p>
+                                            <%= farm.phone %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="pharmacy-footer">
+                                    A 350m. da sua localização atual
+                                    <label for="pharmacy-opt"></label>
+                                    <input type="radio" name="idFarm" id="pharmacy-opt" value="<%= farm.id %>">
+                                </div>
+                                <input type="hidden" name="idMed" value="<%= idMed %>">
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+                <br>
+                <div class="button-row">
+                    <button class="default-button">Reservar</button>
+                </div>
+            </form>
         </main>
 
         <%- include('partials/nav_bottom.ejs') %>

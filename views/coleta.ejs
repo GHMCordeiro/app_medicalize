@@ -1,13 +1,56 @@
 <%- include('partials/header.ejs') %>
+    <header>
+        <div class="header-row">
+            <span>
+                <a href="/home">
+                    <img src="/img/icons/chevron-left_icon.svg" alt="">
+                </a>
+            </span>
+            
+            <p>Pontos de coleta</p>
 
-    <% pontos.forEach(ponto=>{ %>
-        <div border="1">
-            <span><%= ponto.name %></span> <br><br>
-            <span><%= ponto.address %></span> <br><br>
-            <span><%= ponto.phone %></span> <br><br>
+            <span></span>
         </div>
-        <br><br><br>
-        <% }) %>
+    </header>
 
-            <%- include('partials/nav_bottom.ejs') %>
-                <%- include('partials/footer.ejs') %>
+    <main>
+        <div class="preview-options">
+            <div class="preview-options-row">
+                <div class="preview-map">Mapa</div>
+                <div class="preview-list">Lista</div>
+            </div>
+            <div class="list-pharmacies">
+                <% pontos.forEach(ponto=>{ %>
+                    <div class="pharmacy">
+                        <div class="pharmacy-header">
+                            <p>
+                                <%= ponto.name %>
+                            </p>
+                        </div>
+                        <div class="pharmacy-content">
+                            <p>
+                                <%= ponto.address %>
+                            </p>
+                            <div>
+                                <img src="/img/icons/clock-outline_icon.svg" alt="">
+                                <p>Seg a Sex - 09:00 as 23:00</p>
+                            </div>
+                            <div>
+                                <img src="/img/icons/phone_icon.svg" alt="">
+                                <p>
+                                    <%= ponto.phone %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pharmacy-footer">
+                            A 350m. da sua localização atual
+                            <label for="pharmacy-opt"></label>
+                            <input type="radio" name="pharmacy-opt" id="pharmacy-opt">
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </main>
+    <%- include('partials/nav_bottom.ejs') %>
+        <%- include('partials/footer.ejs') %>

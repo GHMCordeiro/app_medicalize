@@ -185,7 +185,6 @@ app.get("/favoritos", (req, res) => {
             .then((data) => {
                 if (data.favMed.length > 0) {
                     var fav = data.favMed
-                    console.log(fav)
                     res.render("fav", { favs: fav })
                 } else {
                     res.render("fav", { favs: 'n' })
@@ -329,8 +328,10 @@ app.get("/reserved", (req, res) => {
 })
 
 
-app.get("/reservar/:idFarm/:idMed", (req, res) => {
-    res.render("reserve", { idFarm: req.params.idFarm, idMed: req.params.idMed });
+app.post("/chooseFarm", (req, res) => {
+    if (req.body.idFarm !== undefined) {
+        res.render("reserve", { idFarm: req.body.idFarm, idMed: req.body.idMed });
+    }
 })
 
 app.post('/reservar', upload.single('imagem'), (req, res) => {
@@ -414,7 +415,7 @@ app.post("/addFarm", (req, res) => {
 
         MedService.FindByIdAndAdd(id, farm, estoque, preco)
             .then((response) => {
-                console.log(response)
+                res.send(response)
             }).catch(err => {
                 console.log(err)
             });
@@ -450,7 +451,7 @@ app.get("/coleta", (req, res) => {
                     v.push(resp)
                 }
             })
-            res.render('coleta', {pontos: v})
+            res.render('coleta', { pontos: v })
         })
 })
 
