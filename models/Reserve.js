@@ -16,6 +16,9 @@ const reserve = new mongoose.Schema({
         },
         concentracao: {
             type: String
+        },
+        image:{
+            type:String
         }
     },
     name: {

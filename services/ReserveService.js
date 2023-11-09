@@ -7,11 +7,12 @@ class Reserves {
     async Cad(data, farm) {
         const newReserve = new Reserve({
             idUser: data.idUser,
-            idMed: {
+            med: {
                 id: data.med.id,
                 name: data.med.name,
                 tipo: data.med.tipo,
-                concentracao: data.med.concentracao
+                concentracao: data.med.concentracao,
+                image: data.med.image
             },
             name: data.name,
             phone: data.phone,
@@ -35,6 +36,11 @@ class Reserves {
         } catch (error) {
             throw error;
         }
+    }
+
+    GetAll(){
+        const res = Reserve.find()
+        return res
     }
 }
 

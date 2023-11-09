@@ -1,0 +1,13 @@
+<%- include('partials/header.ejs') %>
+
+    <% pontos.forEach(ponto=>{ %>
+        <div border="1">
+            <span><%= ponto.name %></span> <br><br>
+            <span><%= ponto.address %></span> <br><br>
+            <span><%= ponto.phone %></span> <br><br>
+        </div>
+        <br><br><br>
+        <% }) %>
+
+            <%- include('partials/nav_bottom.ejs') %>
+                <%- include('partials/footer.ejs') %>

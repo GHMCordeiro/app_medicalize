@@ -1,1 +1,19 @@
-{"image":"no_image.png","_id":"654bc900a2af3499901758ae","name":"Gustavo Henrique","email":"gustavo.henrique@gmail.com","password":"senha123","favMed":[{"id":"652fff7890151f021abe63fd","nome":"Rivotril","preco":18,"tipo":"comprimido","concentracao":"2mg","qtd":"30 comprimidos","image":"rivotril.svg","_id":"654bd7ef44697d71c0a6ae31"}]}
+{
+  "image": "no_image.png",
+  "_id": "654bc900a2af3499901758ae",
+  "name": "Gustavo Henrique",
+  "email": "gustavo.henrique@gmail.com",
+  "password": "senha123",
+  "favMed": [
+    {
+      "id": "652fff7890151f021abe63fd",
+      "nome": "Rivotril",
+      "preco": 18,
+      "tipo": "comprimido",
+      "concentracao": "2mg",
+      "qtd": "30 comprimidos",
+      "image": "rivotril.svg",
+      "_id": "654bd7ef44697d71c0a6ae31"
+    }
+  ]
+}

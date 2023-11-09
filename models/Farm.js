@@ -26,6 +26,10 @@ const farm = new mongoose.Schema({
     },
     phone:{
         type: String
+    },
+    descarte:{
+        type: Boolean,
+        default: false
     }
 })
 

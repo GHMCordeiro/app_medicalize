@@ -20,48 +20,8 @@ app.use(bodyParser.json()) // Permite a utilização de dados via JSON
 app.set('view engine', 'ejs')
 
 
-app.get("/home", (req, res) => {
-    if (localStorage.getItem("dadosUser")) {
+//////////////////// LOGIN E CADASTRO ////////////////////
 
-        MedService.GetAll().then(meds => {
-            res.render("home", { meds: meds });
-        })
-    } else {
-        res.redirect("/login")
-    }
-})
-
-app.post("/cadMed", upload.single('imagem'), (req, res) => {
-    const data = req.body
-    MedService.Cad(data, req.file.filename)
-        .then(response => {
-            res.send(response)
-        }).catch(err => {
-            res.send(err)
-        })
-})
-
-app.get("/med/:id", (req, res) => {
-    if (localStorage.getItem("dadosUser")) {
-        let menorPreco = Infinity;
-
-        MedService.FindById(req.params.id).then(med => {
-            med.farms.forEach(f => {
-                if (f.preco < menorPreco) {
-                    menorPreco = f.preco;
-                }
-            })
-
-            var farm = med.farms.length
-            res.render("med", { med: med, farm: farm, preco: menorPreco })
-
-        }).catch(err => {
-            console.log(err);
-        })
-    } else {
-        res.redirect('/login')
-    }
-})
 
 app.get('/', (req, res) => {
     res.redirect('/login')
@@ -120,6 +80,102 @@ app.post('/cadUser', (req, res) => {
     }
 
 })
+
+//////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// HOME ////////////////////
+
+app.get("/home", (req, res) => {
+    if (localStorage.getItem("dadosUser")) {
+
+        MedService.GetAll().then(meds => {
+            res.render("home", { meds: meds });
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
+
+//////////////////////////////////////////////
+
+
+
+
+//////////////////// PERFIL E LOGOUT ////////////////////
+
+app.get("/perfil", (req, res) => {
+
+    if (localStorage.getItem("dadosUser")) {
+        const dados = localStorage.getItem("dadosUser")
+        var user = JSON.parse(dados)
+        res.render("profile", { dados: user })
+    } else {
+        res.redirect('/login')
+    }
+
+})
+
+
+app.get("/logout", (req, res) => {
+    localStorage.clear();
+    res.redirect('/login')
+})
+
+////////////////////////////////////////////////
+
+
+
+
+//////////////////// CADASTRO DO MEDICAMENTO ////////////////////
+
+app.post("/cadMed", upload.single('imagem'), (req, res) => {
+    const data = req.body
+    MedService.Cad(data, req.file.filename)
+        .then(response => {
+            res.send(response)
+        }).catch(err => {
+            res.send(err)
+        })
+})
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// EXIBIÇÃO DO MEDICAMENTO ////////////////////
+
+app.get("/med/:id", (req, res) => {
+    if (localStorage.getItem("dadosUser")) {
+        let menorPreco = Infinity;
+
+        MedService.FindById(req.params.id).then(med => {
+            med.farms.forEach(f => {
+                if (f.preco < menorPreco) {
+                    menorPreco = f.preco;
+                }
+            })
+
+            var farm = med.farms.length
+            res.render("med", { med: med, farm: farm, preco: menorPreco })
+
+        }).catch(err => {
+            console.log(err);
+        })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// FAVORITAR E DESFAVORITAR ////////////////////
 
 app.get("/favoritos", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
@@ -216,17 +272,15 @@ app.get("/desFav/:id", (req, res) => {
     }
 })
 
-app.get("/perfil", (req, res) => {
+//////////////////////////////////////////////////////////////////
 
-    if (localStorage.getItem("dadosUser")) {
-        const dados = localStorage.getItem("dadosUser")
-        var user = JSON.parse(dados)
-        res.render("profile", { dados: user })
-    } else {
-        res.redirect('/login')
-    }
 
-})
+
+
+
+
+//////////////////// PESQUISA DE MEDICAMENTOS ////////////////////
+
 
 app.post("/searchMed", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
@@ -252,30 +306,84 @@ app.get('/searchMed', (req, res) => {
 
 })
 
+
+//////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// MEDICAMENTOS RESERVADOS E RESERVA DE MEDICAMENTOS ////////////////////
+
+
 app.get("/reserved", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
-
-        res.render("reserved")
+        ReserveService.GetAll()
+            .then(response => {
+                var qtd = response.length
+                res.render("reserved", { reserved: response, qtd: qtd })
+            })
     } else {
         res.redirect('/login')
     }
 
 })
 
-app.get("/logout", (req, res) => {
-    localStorage.clear();
-    res.redirect('/login')
+
+app.get("/reservar/:idFarm/:idMed", (req, res) => {
+    res.render("reserve", { idFarm: req.params.idFarm, idMed: req.params.idMed });
 })
 
+app.post('/reservar', upload.single('imagem'), (req, res) => {
+    const user = JSON.parse(localStorage.getItem("dadosUser"))
+    MedService.FindById(req.body.idMed)
+        .then(m => {
+            var price = 0
+
+            const data = {
+                idUser: user._id,
+                med: {
+                    id: req.body.idMed,
+                    name: m.nome,
+                    tipo: m.tipo,
+                    concentracao: m.concentracao,
+                    image: m.image
+                },
+                name: req.body.name,
+                phone: req.body.phone,
+                prescricao: req.file.filename,
+                price: price
+            }
+
+            FarmService.FindById(req.body.idFarm)
+                .then(response => {
+                    ReserveService.Cad(data, response)
+                        .then(x => {
+                            res.redirect('/reserved')
+                        }).catch(err => {
+                            console.log(err)
+                        });
+                })
+
+        })
+})
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// CADASTRO DE FARMÁCIAS ////////////////////
+
+
 app.post("/cadFarm", (req, res) => {
-    const { email, password, name, address, latitude, longitude, phone } = req.body
+    const { email, password, name, address, latitude, longitude, phone, descarte } = req.body
 
     UserService.Verify(email)
         .then(x => {
             if (x === null) {
                 UserService.Cad(name, email, password)
                     .then(t => {
-                        FarmService.Cad(email, password, name, address, latitude, longitude, phone)
+                        FarmService.Cad(email, password, name, address, latitude, longitude, phone, descarte)
                             .then(c => {
                                 res.redirect('/login')
                             }).catch(err => {
@@ -290,6 +398,13 @@ app.post("/cadFarm", (req, res) => {
             console.log(err)
         });
 })
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// ADIÇÃO E REMOÇÃO DA FARMÁCIA QUE REALIZA A VENDA DO MEDICAMENTO NO MEDICAMENTO ////////////////////
 
 app.post("/addFarm", (req, res) => {
     FarmService.FindById(req.body.idFarm).then((farm) => {
@@ -322,6 +437,29 @@ app.post("/removeFarm", (req, res) => {
     })
 })
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+app.get("/coleta", (req, res) => {
+    FarmService.GetAll()
+        .then(response => {
+            const v = []
+            response.forEach(resp => {
+                if (resp.descarte === true) {
+                    v.push(resp)
+                }
+            })
+            res.render('coleta', {pontos: v})
+        })
+})
+
+
+
+
+
+//////////////////// LISTA DAS FRAMÁCIAS QUE REALIZAM A VENDA DO MEDICAMENTO ////////////////////
+
 app.get('/farms/?:id', (req, res) => {
     MedService.FindById(req.params.id)
         .then((response) => {
@@ -330,6 +468,14 @@ app.get('/farms/?:id', (req, res) => {
             console.log(err)
         });
 })
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////// ESCOLHA DA IMAGEM PARA MUDAR A FOTO DO PERFIL DO USUARIO ////////////////////
 
 app.get('/image', (req, res) => {
     if (localStorage.getItem("dadosUser")) {
@@ -340,6 +486,13 @@ app.get('/image', (req, res) => {
     }
 
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////// UPLOAD DE IMAGENS ////////////////////
+
 
 app.post('/upload', upload.single('imagem'), (req, res) => {
     const nomeImagem = req.file.filename;
@@ -355,41 +508,10 @@ app.post('/upload', upload.single('imagem'), (req, res) => {
         })
 });
 
-app.get("/reservar/:idFarm/:idMed", (req, res) => {
-    res.render("reserve", { idFarm: req.params.idFarm, idMed: req.params.idMed });
-})
 
-app.post('/reservar', upload.single('imagem'), (req, res) => {
-    const user = JSON.parse(localStorage.getItem("dadosUser"))
-    MedService.FindById(req.body.idMed)
-        .then(m => {
-            var price = 0
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            const data = {
-                idUser: user._id,
-                med: {
-                    id: req.body.idMed,
-                    name: m.nome,
-                    tipo: m.tipo,
-                    concentracao: m.concentracao
-                },
-                name: req.body.name,
-                phone: req.body.phone,
-                prescricao: req.file.filename,
-                price: price
-            }
 
-            FarmService.FindById(req.body.idFarm)
-                .then(response => {
-                    ReserveService.Cad(data, response)
-                        .then(x => {
-                            res.redirect('/home')
-                        }).catch(err => {
-                            console.log(err)
-                        });
-                })
-        })
-})
 
 
 app.listen(8080, function (erro) {
