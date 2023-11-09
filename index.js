@@ -6,7 +6,10 @@ import MedService from './services/MedService.js';
 import FarmService from './services/FarmService.js';
 import ReserveService from './services/ReserveService.js';
 import { LocalStorage } from 'node-localstorage';
-import { upload } from './multer.js';
+import { uploadPerfil } from './multer/image_perfil.js';
+import { uploadMed } from './multer/image_med.js';
+import { uploadReserve } from './multer/image_reserva.js';
+import fs from 'fs'
 
 const localStorage = new LocalStorage('./localStorage');
 
@@ -131,7 +134,7 @@ app.get("/logout", (req, res) => {
 
 //////////////////// CADASTRO DO MEDICAMENTO ////////////////////
 
-app.post("/cadMed", upload.single('imagem'), (req, res) => {
+app.post("/cadMed", uploadMed.single('imagem'), (req, res) => {
     const data = req.body
     MedService.Cad(data, req.file.filename)
         .then(response => {
@@ -334,7 +337,7 @@ app.post("/chooseFarm", (req, res) => {
     }
 })
 
-app.post('/reservar', upload.single('imagem'), (req, res) => {
+app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
     const user = JSON.parse(localStorage.getItem("dadosUser"))
     MedService.FindById(req.body.idMed)
         .then(m => {
@@ -495,8 +498,22 @@ app.get('/image', (req, res) => {
 //////////////////// UPLOAD DE IMAGENS ////////////////////
 
 
-app.post('/upload', upload.single('imagem'), (req, res) => {
+app.post('/upload', uploadPerfil.single('imagem'), (req, res) => {
     const nomeImagem = req.file.filename;
+
+    const user = JSON.parse(localStorage.getItem("dadosUser"))
+
+    if (user.image !== 'no_image.png') {
+        const path = 'public/uploads/perfil/' + user.image
+        fs.unlink(path, (err) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("Imagem removida")
+            }
+        })
+    }
+
     UserService.UpdateImage(req.body.id, nomeImagem)
         .then(response => {
             UserService.FindById(req.body.id)
