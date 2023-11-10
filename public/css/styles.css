@@ -743,7 +743,7 @@ main .preview-options{
 }
 
 .pharmacy-content p{
-    font-size: 1.1rem;
+    font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -771,4 +771,160 @@ main .preview-options{
 
 #pharmacy-selection .button-row .default-button{
     width: 100%;
+}
+
+/* TELA DE DETALHES DA RESERVA */
+#booking-details .header-row span:last-child img{
+    visibility: hidden;
+}
+
+#booking-details main{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#booking-details section{
+    padding: 0 20px;
+}
+
+#booking-details .title{
+    padding-bottom: 0;
+    margin-bottom: 10px;
+    border-bottom: none;
+}
+
+#booking-details .login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#booking-details .input-field{
+    height: 47px;
+    border: 2px solid #CDCDCD;
+    border-radius: 10px;
+    position: relative;
+    padding: 0 10px;
+}
+
+#booking-details .input-field label{
+    font-size: 1.1rem;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888888;
+}
+
+#booking-details .input-field input{
+    width: 100%;
+    height: 100%;
+    font-size: 0.9rem;
+}
+
+#booking-details .input-field .input-text:focus + label{
+    font-size: 0.8rem;
+    top: 5px;
+    transform: none;
+    color: rgba(0, 0, 0, 0.5);
+    transition: all .3s ease-out;
+}
+
+#booking-details .input-field .input-text:focus{
+    width: calc(100% - 20px);
+    height: auto;
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.input-field input[type="file"]{
+    display: none;
+}
+
+#booking-details .pharmacy{
+    background-color: #F8F8F8;
+}
+
+.chosen-medication{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #CDCDCD;
+    background-color: #F8F8F8;
+}
+
+#booking-details .collection-points-row{
+    padding: 0;
+    margin-top: 10px;
+}
+
+.chosen-medication-first-row,
+.chosen-medication-last-row,
+.amount-area{
+    display: flex;
+}
+
+.amount-area{
+    gap: 5px;
+}
+
+.chosen-medication-first-row,
+.chosen-medication-last-row{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chosen-medication-first-row p:first-child{
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.chosen-medication-first-row p:last-child{
+    font-size: 1rem;
+}
+
+.chosen-medication-last-row p:first-child,
+.chosen-medication-last-row p:last-child{
+    font-size: 0.95rem;
+}
+
+.amount-btn{
+    display: grid;
+    place-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    background: #D9EBD4;
+    font-size: 1.2rem;
+}
+
+#booking-details footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-top: 1px solid #CDCDCD;
+    background-color: #FFFFFF;
+}
+
+.total-price-area{
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price-area p{
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+#booking-details .scroll-area{
+    height: calc(100% - 172px);
+    padding-bottom: 20px;
 }

@@ -333,7 +333,19 @@ app.get("/reserved", (req, res) => {
 
 app.post("/chooseFarm", (req, res) => {
     if (req.body.idFarm !== undefined) {
-        res.render("reserve", { idFarm: req.body.idFarm, idMed: req.body.idMed });
+
+        MedService.FindById(req.body.idMed)
+            .then(response => {
+                const farms = response.farms 
+                farms.forEach(farm=>{
+                    if(farm.id === req.body.idFarm){
+                        res.render("reserve", { Farm: farm, idMed: req.body.idMed, Med: response });
+                    }
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+
     }
 })
 
