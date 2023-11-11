@@ -9,94 +9,113 @@
                 <span></span>
             </div>
         </header>
-
-        <main class="scroll-area">
-            <section>
-                <p class="title">Informações do cliente</p>
-                <div class="login-form">
-                    <input type="hidden" name="idFarm" value="<%= Farm._id %>">
-                    <div class="input-field">
-                        <input class="input-text" type="text" name="name" id="nome">
-                        <label for="nome">Nome</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input class="input-text" type="text" name="phone" id="telefone">
-                        <label for="telefone">Telefone</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input type="file" name="imagem" id="receita" class="file-input">
-                        <input type="text" name="file-name" id="file-name" class="file event input-text"
-                            readonly="readonly">
-                        <label for="receita">Prescrição Médica</label>
-                    </div>
-            </section>
-
-            <section>
-                <p class="title">Farmácia selecionada</p>
-                <div class="pharmacy">
-                    <div class="pharmacy-header">
-                        <p><%= Farm.name %></p>
-                        <p><%= Farm.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) %></p>
-                    </div>
-                    <div class="pharmacy-content">
-                        <p><%= Farm.address %></p>
-                        <div>
-                            <img src="/img/icons/clock-outline_icon.svg" alt="">
-                            <p>Seg a Sex - 09:00 as 23:00</p>
+        <form action="/reservar" method="post">
+            <main class="scroll-area">
+                <section>
+                    <p class="title">Informações do cliente</p>
+                    <div class="login-form">
+                        <input type="hidden" name="idFarm" value="<%= Farm._id %>">
+                        <input type="hidden" name="idMed" value="<%= idMed %>">
+                        <div class="input-field">
+                            <input class="input-text" type="text" name="name" id="nome">
+                            <label for="nome">Nome</label>
                         </div>
-                        <div>
-                            <img src="/img/icons/phone_icon.svg" alt="">
-                            <p><%= Farm.phone %></p>
+
+                        <div class="input-field">
+                            <input class="input-text" type="text" name="phone" id="telefone">
+                            <label for="telefone">Telefone</label>
                         </div>
-                    </div>
-                    <div class="pharmacy-footer">
-                        A 350m. da sua localização atual
-                    </div>
-                </div>
-                <div class="collection-points-row">
-                    <a href="#">
-                        <div class="collection-points">
-                            <span><img src="/img/icons/map-marker-check-outline.svg" alt=""></span>
-                            <p>Escolher outra farmácia</p>
-                            <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
+
+                        <div class="input-field">
+                            <input type="file" name="imagem" id="receita" class="file-input">
+                            <input type="text" name="file-name" id="file-name" class="file event input-text"
+                                readonly="readonly">
+                            <label for="receita">Prescrição Médica</label>
                         </div>
-                    </a>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <p class="title">Medicamento escolhido</p>
-
-                <div class="chosen-medication">
-                    <div class="chosen-medication-first-row">
-                        <p><%= Med.nome %></p>
-                        <p id="unit-price"><%= Farm.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) %></p>
-                    </div>
-
-                    <div class="chosen-medication-last-row">
-                        <p><%= Med.tipo %>, <%= Med.concentracao %></p>
-                        <div class="amount-area">
-                            <span class="amount-btn" id="subtraction">&minus;</span>
-                            <p id="quantity">1</p>
-                            <span class="amount-btn" id="addition">&plus;</span>
+                <section>
+                    <p class="title">Farmácia selecionada</p>
+                    <div class="pharmacy">
+                        <div class="pharmacy-header">
+                            <p>
+                                <%= Farm.name %>
+                            </p>
+                            <p>
+                                <%= Farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                            </p>
+                        </div>
+                        <div class="pharmacy-content">
+                            <p>
+                                <%= Farm.address %>
+                            </p>
+                            <div>
+                                <img src="/img/icons/clock-outline_icon.svg" alt="">
+                                <p>Seg a Sex - 09:00 as 23:00</p>
+                            </div>
+                            <div>
+                                <img src="/img/icons/phone_icon.svg" alt="">
+                                <p>
+                                    <%= Farm.phone %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pharmacy-footer">
+                            A 350m. da sua localização atual
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                    <div class="collection-points-row">
+                        <a href="#">
+                            <div class="collection-points">
+                                <span><img src="/img/icons/map-marker-check-outline.svg" alt=""></span>
+                                <p>Escolher outra farmácia</p>
+                                <span><img src="/img/icons/chevron-right_icon.svg" alt=""></span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
 
-        <%- include('partials/nav_bottom.ejs') %>
+                <section>
+                    <p class="title">Medicamento escolhido</p>
+
+                    <div class="chosen-medication">
+                        <div class="chosen-medication-first-row">
+                            <p>
+                                <%= Med.nome %>
+                            </p>
+                            <p id="unit-price">
+                                <%= Farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                            </p>
+                        </div>
+
+                        <div class="chosen-medication-last-row">
+                            <p>
+                                <%= Med.tipo %>, <%= Med.concentracao %>
+                            </p>
+                            <div class="amount-area">
+                                <span class="amount-btn" id="subtraction">&minus;</span>
+                                <p id="quantity">1</p>
+                                <span class="amount-btn" id="addition">&plus;</span>
+                                <input type="hidden" name="price" id="total-price-hidden">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
 
             <footer>
                 <div class="total-price-area">
                     <p>Total</p>
-                    <p id="total-price">R$27,50</p>
+                    <input type="text" id="total-price"
+                        value="<%= Farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>"
+                        disabled>
                 </div>
                 <button class="default-button">Continuar</button>
             </footer>
-            <script src="/js/main.js"></script>
+        </form>
+        <script src="/js/main.js"></script>
     </div>
 
-    <%- include('partials/footer.ejs') %>
+    </body>
+
+    </html>

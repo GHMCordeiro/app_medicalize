@@ -21,17 +21,17 @@ eyeIcons.forEach((icon, index) => {
 /* "FAVORITE" AND "UNFAVORITE" A MEDICATION */
 const favoriteIcon = document.getElementById('star-status');
 const starIcon = document.querySelector('#star-status img');
-
-favoriteIcon.addEventListener('click', () => {
-    const starOutlinePath = "assets/img/icons/star-outline_icon.svg";
-    const starFilledPath = "assets/img/icons/star_icon.svg";
-    if (starIcon.src.includes(starOutlinePath)) {
-        starIcon.src = starFilledPath;
-    } else {
-        starIcon.src = starOutlinePath;
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    favoriteIcon.addEventListener('click', () => {
+        const starOutlinePath = "assets/img/icons/star-outline_icon.svg";
+        const starFilledPath = "assets/img/icons/star_icon.svg";
+        if (starIcon.src.includes(starOutlinePath)) {
+            starIcon.src = starFilledPath;
+        } else {
+            starIcon.src = starOutlinePath;
+        }
 });
-
+})
 
 /* SHOW AND HIDE LEAFLET CONTENT */
 const leafletItemHeaders = document.querySelectorAll(".leaflet-item-header");
@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let quantity = 1;
     let unitPriceElement = document.getElementById('unit-price');
     let totalElement = document.getElementById('total-price');
+    let totalElementHidden = document.getElementById('total-price-hidden');
 
     let unitPrice = parseFloat(unitPriceElement.innerText.replace('R$', '').replace(',', '.'));
 
@@ -123,8 +124,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTotalPrice() {
         const totalPrice = quantity * unitPrice;
         const formattedPrice = totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        if (totalElement) {
-            totalElement.innerText = formattedPrice;
+        if (totalElement.value) {
+            totalElement.value = formattedPrice;
+            totalElementHidden.value = totalPrice;
         }
     }
 

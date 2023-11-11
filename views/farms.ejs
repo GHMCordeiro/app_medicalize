@@ -49,14 +49,15 @@
                                     <label for="pharmacy-opt"></label>
                                     <input type="radio" name="idFarm" id="pharmacy-opt" value="<%= farm.id %>">
                                 </div>
-                                <input type="hidden" name="idMed" value="<%= idMed %>">
+
                             </div>
                             <% }) %>
+                                <input type="hidden" name="idMed" value="<%= idMed %>">
                     </div>
                 </div>
                 <br>
                 <div class="button-row">
-                    <button class="default-button">Reservar</button>
+                    <button class="default-button" type="submit">Selecionar</button>
                 </div>
             </form>
         </main>

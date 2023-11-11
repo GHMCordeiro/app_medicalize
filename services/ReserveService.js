@@ -38,8 +38,8 @@ class Reserves {
         }
     }
 
-    GetAll(){
-        const res = Reserve.find()
+    GetAll(id){
+        const res = Reserve.find({idUser: id})
         return res
     }
 }

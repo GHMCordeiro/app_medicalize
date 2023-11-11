@@ -319,7 +319,8 @@ app.get('/searchMed', (req, res) => {
 
 app.get("/reserved", (req, res) => {
     if (localStorage.getItem("dadosUser")) {
-        ReserveService.GetAll()
+        const user = JSON.parse(localStorage.getItem("dadosUser"))
+        ReserveService.GetAll(user._id)
             .then(response => {
                 var qtd = response.length
                 res.render("reserved", { reserved: response, qtd: qtd })
@@ -351,9 +352,9 @@ app.post("/chooseFarm", (req, res) => {
 
 app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
     const user = JSON.parse(localStorage.getItem("dadosUser"))
-    MedService.FindById(req.body.idMed)
+    /* MedService.FindById(req.body.idMed)
         .then(m => {
-            var price = 0
+            var price = Number(req.body.price)
 
             const data = {
                 idUser: user._id,
@@ -380,7 +381,9 @@ app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
                         });
                 })
 
-        })
+        }) */
+
+
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -477,6 +480,7 @@ app.get("/coleta", (req, res) => {
 //////////////////// LISTA DAS FRAMÁCIAS QUE REALIZAM A VENDA DO MEDICAMENTO ////////////////////
 
 app.get('/farms/?:id', (req, res) => {
+    
     MedService.FindById(req.params.id)
         .then((response) => {
             res.render('farms', { farms: response.farms, idMed: req.params.id })
