@@ -1,12 +1,30 @@
 <%- include('partials/header.ejs') %>
+    <header>
+        <div class="header-row">
+            <span>
+                <a href="/perfil"><img src="/img/icons/chevron-left_icon.svg" alt=""></a>
+            </span>
 
+            <p>Upload imagem Perfil</p>
 
-    <h1>Upload de Imagem</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="imagem">
-        <input type="hidden" name="id" value="<%= user._id %>">
-        <input type="submit" value="Enviar">
-    </form>
+            <span></span>
+        </div>
+    </header>
+    <main>
+        <h1>Upload de Imagem</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="login-form">
+                <div class="input-field">
+                    <input type="file" name="imagem" id="receita" class="file-input">
+                    <input type="text" name="file-name" id="file-name" class="file event input-text"
+                        readonly="readonly">
+                    <label for="receita">Prescrição Médica</label>
+                </div>
+                <input type="hidden" name="id" value="<%= user._id %>">
+            </div>
+            <button class="default-button" type="submit">Atualizar</button>
+        </form>
+    </main>
 
     <%- include('partials/nav_bottom.ejs') %>
         <%- include('partials/footer.ejs') %>

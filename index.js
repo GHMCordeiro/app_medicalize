@@ -352,7 +352,7 @@ app.post("/chooseFarm", (req, res) => {
 
 app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
     const user = JSON.parse(localStorage.getItem("dadosUser"))
-    /* MedService.FindById(req.body.idMed)
+    MedService.FindById(req.body.idMed)
         .then(m => {
             var price = Number(req.body.price)
 
@@ -381,8 +381,7 @@ app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
                         });
                 })
 
-        }) */
-
+        }) 
 
 })
 

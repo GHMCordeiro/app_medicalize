@@ -19,7 +19,7 @@ class Reserves {
             prescricao: data.prescricao,
             price: data.price,
             farm: {
-                id: farm.id,
+                id: farm._id,
                 name: farm.name,
                 address: farm.address,
                 localization: {

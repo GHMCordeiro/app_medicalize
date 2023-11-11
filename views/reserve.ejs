@@ -9,12 +9,12 @@
                 <span></span>
             </div>
         </header>
-        <form action="/reservar" method="post">
+        <form action="/reservar" method="post" enctype="multipart/form-data">
             <main class="scroll-area">
                 <section>
                     <p class="title">Informações do cliente</p>
                     <div class="login-form">
-                        <input type="hidden" name="idFarm" value="<%= Farm._id %>">
+                        <input type="hidden" name="idFarm" value="<%= Farm.id %>">
                         <input type="hidden" name="idMed" value="<%= idMed %>">
                         <div class="input-field">
                             <input class="input-text" type="text" name="name" id="nome">
@@ -32,6 +32,7 @@
                                 readonly="readonly">
                             <label for="receita">Prescrição Médica</label>
                         </div>
+                    </div>
                 </section>
 
                 <section>
@@ -110,7 +111,7 @@
                         value="<%= Farm.preco.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>"
                         disabled>
                 </div>
-                <button class="default-button">Continuar</button>
+                <button class="default-button">Reservar</button>
             </footer>
         </form>
         <script src="/js/main.js"></script>

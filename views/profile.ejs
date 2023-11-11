@@ -1,17 +1,38 @@
 <%- include('partials/header.ejs') %>
     <div class="container">
-        <center>
-            <div>
-                <img src="/uploads/perfil/<%= dados.image %>" alt="foto perfil">
-                <a href="/image">edit</a>
+        <header>
+            <div class="header-row">
+                <span><img src="/img/icons/chevron-left_icon.svg" alt=""></span>
+
+                <p>Perfil</p>
+
+                <span><img src="/img/icons/bell-badge_icon.svg" alt=""></span>
             </div>
-
-            <br><br><br>
-
+        </header>
+        <main>
+            <div class="user-information-area">
+                <div class="user-image">
+                    <div class="profile-picture">
+                        <img src="/uploads/perfil/<%= dados.image %>" alt="foto perfil">
+                        <a href="/image">edit</a>
+                    </div>
+                </div>
+                <div class="user-data">
+                    <p><%= dados.name %></p>
+                    <p>Av. Clara Gianotti de Souza, 257 - Centro </p>
+                    <p>Registro - SP, 11900-000</p>
+                </div>
+            </div>
+            <div class="profile-options">
+                <div class="profile-option-row">Configurações</div>
+                <div class="profile-option-row">Editar perfil</div>
+                <div class="profile-option-row">Minhas prescrições</div>
+                <div class="profile-option-row">Cartões de pagamento</div>
+            </div>
             <div class="">
-                <a href="/logout">Sair</a>
+                <a class="default-button"  href="/logout">Sair</a>
             </div>
-        </center>
+        </main>
 
         <%- include('partials/nav_bottom.ejs') %>
     </div>

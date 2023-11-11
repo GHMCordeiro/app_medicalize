@@ -924,6 +924,12 @@ main .preview-options{
     font-weight: 700;
 }
 
+.total-price-area input{
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
 #booking-details .scroll-area{
     height: calc(100% - 172px);
     padding-bottom: 20px;
