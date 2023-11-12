@@ -9,21 +9,24 @@
 
             <span></span>
         </div>
-    </header>
-    <main>
-        <h1>Upload de Imagem</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="login-form">
-                <div class="input-field">
-                    <input type="file" name="imagem" id="receita" class="file-input">
-                    <input type="text" name="file-name" id="file-name" class="file event input-text"
-                        readonly="readonly">
-                    <label for="receita">Prescrição Médica</label>
+    </header >
+    <main id="booking-details">
+        <div class="upload">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="login-form mb">
+                    <div class="input-field">
+                        <input type="file" name="imagem" id="receita" class="file-input">
+                        <input type="text" name="file-name" id="file-name" class="file event input-text"
+                            readonly="readonly">
+                        <label for="receita">Imagem Perfil</label>
+                    </div>
+                    <input type="hidden" name="id" value="<%= user._id %>">
                 </div>
-                <input type="hidden" name="id" value="<%= user._id %>">
-            </div>
-            <button class="default-button" type="submit">Atualizar</button>
-        </form>
+                <div>
+                    <button class="default-button" type="submit">Atualizar</button>
+                </div>
+            </form>
+        </div>
     </main>
 
     <%- include('partials/nav_bottom.ejs') %>

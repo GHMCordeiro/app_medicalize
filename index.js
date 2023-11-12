@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login?:msg', (req, res) => {
+    localStorage.clear()
     res.render('index', { msg: req.params.msg })
 })
 
@@ -38,8 +39,13 @@ app.post("/verifyUser", (req, res) => {
     const { email, password } = req.body
     UserService.Login(email, password)
         .then(x => {
-            localStorage.setItem("dadosUser", JSON.stringify(x));
-            res.redirect("/home")
+            console.log(x)
+            if (x.length > 0) {
+                localStorage.setItem("dadosUser", JSON.stringify(x));
+                res.redirect("/home")
+            }else{
+                res.redirect('/login')
+            }
         }).catch(err => {
             res.redirect("/login1")
         }
@@ -337,9 +343,9 @@ app.post("/chooseFarm", (req, res) => {
 
         MedService.FindById(req.body.idMed)
             .then(response => {
-                const farms = response.farms 
-                farms.forEach(farm=>{
-                    if(farm.id === req.body.idFarm){
+                const farms = response.farms
+                farms.forEach(farm => {
+                    if (farm.id === req.body.idFarm) {
                         res.render("reserve", { Farm: farm, idMed: req.body.idMed, Med: response });
                     }
                 })
@@ -381,7 +387,7 @@ app.post('/reservar', uploadReserve.single('imagem'), (req, res) => {
                         });
                 })
 
-        }) 
+        })
 
 })
 
@@ -479,7 +485,7 @@ app.get("/coleta", (req, res) => {
 //////////////////// LISTA DAS FRAMÁCIAS QUE REALIZAM A VENDA DO MEDICAMENTO ////////////////////
 
 app.get('/farms/?:id', (req, res) => {
-    
+
     MedService.FindById(req.params.id)
         .then((response) => {
             res.render('farms', { farms: response.farms, idMed: req.params.id })

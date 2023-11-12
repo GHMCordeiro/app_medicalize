@@ -1,8 +1,12 @@
 <%- include('partials/header.ejs') %>
-    <div class="container">
+    <div class="container" id="profile">
         <header>
             <div class="header-row">
-                <span><img src="/img/icons/chevron-left_icon.svg" alt=""></span>
+                <span>
+                    <a href="/home">
+                        <img src="/img/icons/chevron-left_icon.svg" alt="">
+                    </a>
+                </span>
 
                 <p>Perfil</p>
 
@@ -13,9 +17,13 @@
             <div class="user-information-area">
                 <div class="user-image">
                     <div class="profile-picture">
-                        <img src="/uploads/perfil/<%= dados.image %>" alt="foto perfil">
-                        <a href="/image">edit</a>
+                        <img src="/uploads/perfil/<%= dados.image %>" alt="">
                     </div>
+                    <span class="set-image">
+                        <a href="/image">
+                            <img src="/img/icons/set-image_icon.svg" alt="">
+                        </a>
+                    </span>
                 </div>
                 <div class="user-data">
                     <p><%= dados.name %></p>
@@ -24,13 +32,26 @@
                 </div>
             </div>
             <div class="profile-options">
-                <div class="profile-option-row">Configurações</div>
-                <div class="profile-option-row">Editar perfil</div>
-                <div class="profile-option-row">Minhas prescrições</div>
-                <div class="profile-option-row">Cartões de pagamento</div>
+                <div class="profile-option-row">
+                    Configurações
+                    <img src="/img/icons/chevron-right_icon.svg" alt="">
+                </div>
+                <div class="profile-option-row">
+                    Editar perfil
+                    <img src="/img/icons/chevron-right_icon.svg" alt="">
+                </div>
+                <div class="profile-option-row">
+                    Minhas prescrições
+                    <img src="/img/icons/chevron-right_icon.svg" alt="">
+                </div>
+                <div class="profile-option-row">
+                    Cartões de pagamento
+                    <img src="/img/icons/chevron-right_icon.svg" alt="">
+                </div>
             </div>
-            <div class="">
-                <a class="default-button"  href="/logout">Sair</a>
+
+            <div class="button-row">
+                <a href="/logout" class="alternative-button">Sair</a>
             </div>
         </main>
 
