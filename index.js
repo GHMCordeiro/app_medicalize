@@ -43,7 +43,7 @@ app.post("/verifyUser", (req, res) => {
                 localStorage.setItem("dadosUser", JSON.stringify(x));
                 res.redirect("/home")
             }else{
-                res.redirect('/login')
+                res.redirect('/login1')
             }
         }).catch(err => {
             res.redirect("/login1")
