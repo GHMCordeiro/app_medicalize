@@ -74,6 +74,16 @@ class Meds {
         return res
     }
 
+    Fav(id){
+        const res = Med.findByIdAndUpdate(id, { fav: 'true' })
+        return res  
+    }
+
+    DesFav(id){
+        const res = Med.findByIdAndUpdate(id, { fav: 'false' })
+        return res  
+    }
+
 
 }
 
