@@ -39,7 +39,6 @@ app.post("/verifyUser", (req, res) => {
     const { email, password } = req.body
     UserService.Login(email, password)
         .then(x => {
-            console.log(x)
             if (x) {
                 localStorage.setItem("dadosUser", JSON.stringify(x));
                 res.redirect("/home")
