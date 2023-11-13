@@ -40,7 +40,7 @@ app.post("/verifyUser", (req, res) => {
     UserService.Login(email, password)
         .then(x => {
             console.log(x)
-            if (x.length > 0) {
+            if (x) {
                 localStorage.setItem("dadosUser", JSON.stringify(x));
                 res.redirect("/home")
             }else{
