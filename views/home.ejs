@@ -37,9 +37,15 @@
                                 <img class="medicine" src="/uploads/med/<%= med.image %>" alt="">
 
                                 <span class="star-icon">
-                                     <a href="/fav/<%= med._id %>">
-                                    <img src="/img/icons/star-outline_icon.svg" alt="">
-                                    </a>
+                                    <% if(med.fav==='false' ){ %>
+                                        <a href="/fav/<%= med._id %>">
+                                            <img src="/img/icons/star-outline_icon.svg" alt="">
+                                        </a>
+                                        <% } else{ %>
+                                            <a href="/desFav/<%= med._id %>">
+                                                <img src="/img/icons/star_icon.svg" alt="">
+                                            </a>
+                                            <% } %>
                                 </span>
 
                             </div>

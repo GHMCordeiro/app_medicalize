@@ -10,24 +10,24 @@
         </div>
         <form action="/cadUser" method="post">
             <% if(msg==='1' ){ %>
-                <div class="alert-noti">
+                <div class="error-alert-box">
+                    <img src="/img/login-error.png" alt="">
                     <p>Aceite os termos!</p>
-                    <br>
                 </div>
                 <% } else if(msg==='2' ){ %>
-                    <div class="alert-noti">
+                    <div class="error-alert-box">
+                        <img src="/img/login-error.png" alt="">
                         <p>Senhas não conferem!</p>
-                        <br>
                     </div>
                     <% } else if(msg==='3' ) { %>
-                        <div class="alert-noti">
+                        <div class="error-alert-box">
+                            <img src="/img/login-error.png" alt="">
                             <p>Preencha todos os campos!</p>
-                            <br>
                         </div>
                         <% } else if(msg==='4' ) { %>
-                            <div class="alert-noti">
+                            <div class="error-alert-box">
+                                <img src="/img/login-error.png" alt="">
                                 <p>Email já cadastrado!</p>
-                                <br>
                             </div>
                             <% } %>
                                 <div class="login-form">
@@ -47,7 +47,7 @@
                                         <div class="show-hide-passwd">
                                             <input type="password" name="password" id="senha"
                                                 placeholder="Entre com sua senha">
-                                            <img class="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
+                                            <img id="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
                                         </div>
                                     </div>
 
@@ -56,7 +56,7 @@
                                         <div class="show-hide-passwd">
                                             <input type="password" name="confPassword" id="repetir-senha"
                                                 placeholder="Repita sua senha">
-                                            <img class="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
+                                            <img id="eye-icon" src="/img/icons/eye-outline_icon.png" alt="">
                                         </div>
                                     </div>
                                     <div class="terms-conditions">

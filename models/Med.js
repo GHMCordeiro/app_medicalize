@@ -18,6 +18,10 @@ const med = new mongoose.Schema({
         type: String,
         required: true
     },
+    fav:{
+        type: String,
+        default: 'false'
+    },
     image: {
         type: String,
         default: 'generico.jpg'

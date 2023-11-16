@@ -1,37 +1,40 @@
-/* SHOW AND HIDE PASSWORD */
-const eyeIcons = document.querySelectorAll('.eye-icon');
-const passwordInputs = document.querySelectorAll('input[type="password"]');
+document.addEventListener('DOMContentLoaded', function() {
 
-function togglePasswordVisibility(index) {
-    if (passwordInputs[index].type === "password") {
+    /* SHOW AND HIDE PASSWORD */
+    const eyeIcons = document.querySelectorAll('#eye-icon');
+    const passwordInputs = document.querySelectorAll('input[type="password"]');
+
+    function togglePasswordVisibility(index) {
+        if (passwordInputs[index].type === "password") {
         passwordInputs[index].type = "text";
-        eyeIcons[index].src = "assets/img/icons/eye-off-outline_icon.png";
+        eyeIcons[index].src = "/img/icons/eye-off-outline_icon.png";
     } else {
         passwordInputs[index].type = "password";
-        eyeIcons[index].src = "assets/img/icons/eye-outline_icon.png";
+        eyeIcons[index].src = "/img/icons/eye-outline_icon.png";
     }
-}
+    }
 
-eyeIcons.forEach((icon, index) => {
-    icon.addEventListener('click', () => {
-        togglePasswordVisibility(index);
+    eyeIcons.forEach((icon, index) => {
+        icon.addEventListener('click', () => {
+            togglePasswordVisibility(index);
+        });
     });
-});
 
-/* "FAVORITE" AND "UNFAVORITE" A MEDICATION */
-const favoriteIcon = document.getElementById('star-status');
-const starIcon = document.querySelector('#star-status img');
-document.addEventListener('DOMContentLoaded', function () {
-    favoriteIcon.addEventListener('click', () => {
-        const starOutlinePath = "assets/img/icons/star-outline_icon.svg";
-        const starFilledPath = "assets/img/icons/star_icon.svg";
-        if (starIcon.src.includes(starOutlinePath)) {
-            starIcon.src = starFilledPath;
-        } else {
-            starIcon.src = starOutlinePath;
-        }
+    /* "FAVORITE" AND "UNFAVORITE" A MEDICATION */
+    const favoriteIcon = document.getElementById('star-status');
+    const starIcon = document.querySelector('#star-status img');
+    document.addEventListener('DOMContentLoaded', function () {
+        favoriteIcon.addEventListener('click', () => {
+            const starOutlinePath = "assets/img/icons/star-outline_icon.svg";
+            const starFilledPath = "assets/img/icons/star_icon.svg";
+            if (starIcon.src.includes(starOutlinePath)) {
+                starIcon.src = starFilledPath;
+            } else {
+                starIcon.src = starOutlinePath;
+            }
+        });
+    })
 });
-})
 
 /* SHOW AND HIDE LEAFLET CONTENT */
 const leafletItemHeaders = document.querySelectorAll(".leaflet-item-header");
@@ -138,3 +141,15 @@ document.addEventListener('DOMContentLoaded', function () {
         updateQuantity(1);
     });
 });
+
+
+const errorAlertBox = document.querySelector('.error-alert-box');
+
+        // Adiciona um ouvinte de evento de clique ao documento
+        document.addEventListener('click', function(event) {
+            // Verifica se o clique não ocorreu dentro do elemento .error-alert-box
+            if (!errorAlertBox.contains(event.target)) {
+                // Oculta o elemento .error-alert-box se o clique não foi dentro dele
+                errorAlertBox.style.display = 'none';
+            }
+        });

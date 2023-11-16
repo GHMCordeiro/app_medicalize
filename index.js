@@ -39,12 +39,11 @@ app.post("/verifyUser", (req, res) => {
     const { email, password } = req.body
     UserService.Login(email, password)
         .then(x => {
-            console.log(x)
             if (x) {
                 localStorage.setItem("dadosUser", JSON.stringify(x));
                 res.redirect("/home")
-            }else{
-                res.redirect('/login')
+            } else {
+                res.redirect('/login1')
             }
         }).catch(err => {
             res.redirect("/login1")
@@ -226,8 +225,13 @@ app.get("/fav/:id", (req, res) => {
                         .then((response) => {
                             UserService.FindById(user._id)
                                 .then(x => {
-                                    localStorage.setItem("dadosUser", JSON.stringify(x));
-                                    res.redirect('/home')
+                                    MedService.Fav(req.params.id)
+                                        .then(r => {
+                                            localStorage.setItem("dadosUser", JSON.stringify(x));
+                                            res.redirect('/home')
+                                        }).catch((err) => {
+                                            console.log(err);
+                                        })
                                 }).catch((error) => {
                                     console.error(error)
                                 })
@@ -239,8 +243,13 @@ app.get("/fav/:id", (req, res) => {
                         .then((response) => {
                             UserService.FindById(user._id)
                                 .then(x => {
-                                    localStorage.setItem("dadosUser", JSON.stringify(x));
-                                    res.redirect('/home')
+                                    MedService.Fav(req.params.id)
+                                        .then(r => {
+                                            localStorage.setItem("dadosUser", JSON.stringify(x));
+                                            res.redirect('/home')
+                                        }).catch((err) => {
+                                            console.log(err);
+                                        })
                                 }).catch((error) => {
                                     console.error(error)
                                 })
@@ -268,8 +277,13 @@ app.get("/desFav/:id", (req, res) => {
             .then(x => {
                 UserService.FindById(user._id)
                     .then(t => {
-                        localStorage.setItem("dadosUser", JSON.stringify(t))
-                        res.redirect('/favoritos')
+                        MedService.DesFav(req.params.id)
+                            .then(r => {
+                                localStorage.setItem("dadosUser", JSON.stringify(t))
+                                res.redirect('/home')
+                            }).catch((err) => {
+                                console.log(err);
+                            })
                     })
             }).catch(err => {
                 console.log(err)

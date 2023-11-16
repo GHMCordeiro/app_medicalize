@@ -25,7 +25,7 @@ html {
 }
 
 body {
-    height: inherit;
+    height: 100vh;
 }
 
 .wrapper{
@@ -41,6 +41,7 @@ body {
 /*ESTILO GERAL*/
 .default-button,
 .alternative-button{
+    width: 100%;
     display: flex;
     height: 47px;
     padding: 10px;
@@ -156,6 +157,31 @@ header .header-row{
     display: flex;
     justify-content: center;
     padding: 0 20px;
+}
+
+.error-alert-box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #CDCDCD;
+    position: absolute;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    left: 0;
+    top: 20px;
+    background-color: #F8F8F8;
+}
+
+.error-alert-box p{
+    font-size: 0.9rem;
+    color: #FF6464;
+}
+
+.error-alert-box img{
+    width: 20px;
+    height: 20px;
 }
 
 /* TELA DE LOGIN E DE CADASTRO */
@@ -374,7 +400,7 @@ header .header-row{
 
 .scroll-area{
     padding: 10px 0;
-    height: calc(100% - 125px);
+    height: calc(100vh - 106px);
     overflow: scroll;
 }
 
@@ -478,6 +504,7 @@ header .header-row{
 
 .card-images .medicine{
     height: 125px;
+    mix-blend-mode: multiply;
 }
 
 .card-images .star-icon{
@@ -674,6 +701,10 @@ main{
 
 .info-last-text-group img{
     width: 20px;
+}
+
+.no-fav p{
+    color: #3232325e;
 }
 
 /* TELA DE SELEÇÃO DA FARMÁCIA */
@@ -930,8 +961,13 @@ main .preview-options{
     font-weight: 700;
 }
 
+#booking-details{
+    height: 100vh;
+
+}
+
 #booking-details .scroll-area{
-    height: calc(100% - 172px);
+    height: calc(100vh - 172px);
     padding-bottom: 20px;
 }
 
@@ -1033,6 +1069,10 @@ main .preview-options{
     border-color: #91C483;
 }
 
+
+
+
+
 .no-fav{
     display: flex;
     justify-content: center;
@@ -1049,4 +1089,39 @@ main .preview-options{
 
 .upload .mb{
     margin-bottom: 10%;
+}
+
+.image-upload-area{
+    width: 100%;
+    padding: 20px;
+}
+
+.image-upload-area input[type="file"]{
+    display: none;
+}
+
+.image-upload-area input[type="text"]{
+    width: 100%;
+    text-align: center;
+}
+
+.form-control label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 350px;
+    border: 2px dashed #323232;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.image-upload-area button{
+    margin-top: 20px;
+}
+
+.form-control label img{
+    width: 24px;
 }

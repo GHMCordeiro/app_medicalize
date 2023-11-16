@@ -1,33 +1,16 @@
 <%- include('partials/header.ejs') %>
-    <header>
-        <div class="header-row">
-            <span>
-                <a href="/perfil"><img src="/img/icons/chevron-left_icon.svg" alt=""></a>
-            </span>
-
-            <p>Upload imagem Perfil</p>
-
-            <span></span>
-        </div>
-    </header >
-    <main id="booking-details">
-        <div class="upload">
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <div class="login-form mb">
-                    <div class="input-field">
-                        <input type="file" name="imagem" id="receita" class="file-input">
-                        <input type="text" name="file-name" id="file-name" class="file event input-text"
-                            readonly="readonly">
-                        <label for="receita">Imagem Perfil</label>
-                    </div>
-                    <input type="hidden" name="id" value="<%= user._id %>">
-                </div>
-                <div>
-                    <button class="default-button" type="submit">Atualizar</button>
-                </div>
-            </form>
-        </div>
-    </main>
-
-    <%- include('partials/nav_bottom.ejs') %>
-        <%- include('partials/footer.ejs') %>
+    <div class="image-upload-area">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-control">
+                <input type="file" name="imagem" id="picture" class="file-input">
+                <label for="picture">
+                    <img src="/img/icons/arrow-collapse-up.svg" alt="">
+                    Upload da imagem
+                </label>
+                <input type="text" name="file-name" id="file-name" class="file event input-text" readonly="readonly">
+            </div>
+            <input type="hidden" name="id" value="<%= user._id %>">
+            <button class="default-button" type="submit">Atualizar</button>
+        </form>
+    </div>
+<%- include('partials/footer.ejs') %>
